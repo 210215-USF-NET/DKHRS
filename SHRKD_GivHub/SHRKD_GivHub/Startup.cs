@@ -28,6 +28,20 @@ namespace SHRKD_GivHub
         {
 
             services.AddControllers();
+            services.AddCors(
+                options =>
+                {
+                    options.AddDefaultPolicy(
+                        builder =>
+                        {
+                            // TODO: limit origins to Angular Domain and APIs
+                            builder.WithOrigins("*")
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                        }
+                        );
+                }
+                );
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SHRKD_GivHub", Version = "v1" });
@@ -47,6 +61,7 @@ namespace SHRKD_GivHub
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthorization();
 
