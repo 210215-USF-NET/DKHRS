@@ -1,4 +1,5 @@
 appsettings.json
+appsettings.Development.json
 # Created by https://www.toptal.com/developers/gitignore/api/csharp,vscode,angular,dotnetcore,visualstudio,xcode
 # Edit at https://www.toptal.com/developers/gitignore?templates=csharp,vscode,angular,dotnetcore,visualstudio,xcode
 
