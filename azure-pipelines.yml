@@ -43,7 +43,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     zipAfterPublish: true
-    projects: '**/StoreMVC/*.csproj'
+    projects: '**/SHRKD_GivHub/SHRKD_GivHub/*.csproj'
 - task: SonarCloudAnalyze@1
 - task: SonarCloudPublish@1
   inputs:
