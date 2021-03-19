@@ -1,5 +1,27 @@
 # GIVHUB By SHRKD
-GIVHUB
+
+GivHub is an Angular Web Application which helps ease the process of connecting users to charities. GivHub can be used to discover charities who support causes that are of interest to our users. Users may create an account in order to subscribe to charity pages, giving you streamlined access to relevant articles, reviews, charity support pages, and other important info.  
+
+## Contributors
+- Steven Imas (Testing, Logging, Quality Assurance)
+- Hans Mittig (DL, BL)
+- Rich Hakes (Scrum Master, VCS, [BL,DL,QA])
+- Kevin Murphy (Front-End, BL)
+- Douglas Richardson (Dev-Ops, Front-End, BL)
+
+## Technologies
+C#, Entity Framework, HTML, JavaScript, CSS, Angular, ASP.NET API, Azure Pipelines,
+ElephantSql, Azure App Services, XUnit, Moq
+
+## SonarCloud
+<img src="./SHRKD_GivHub/Images/sonarCloud_scrnsht.png">
+
+## Project Links
+Project Board: https://trello.com/b/RgJVvYtH/agile-sprint-board
+SonarCloud: https://sonarcloud.io/dashboard?id=210215-USF-NET_GivHub-By-SHRKD
+Web App Link: http://givhub.azurewebsites.net/
+CharityAPI: http://charityapi.orghunter.com/
+Proposal: https://docs.google.com/document/d/1pUdPunBqKLvRkw5Z_tJYfHhTy9KAxHMORz-U8tJ9VrE/edit#
 
 
 ## Requirements
