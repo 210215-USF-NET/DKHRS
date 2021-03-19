@@ -29,11 +29,11 @@ GivHub is an Angular Web Application which helps ease the process of connecting 
 3) View financial  records and IRS standing
 ***
 ## Technologies
-C#, Azure Pipeline, PostgreSql, Angular, ASP.NET REST API, Serilog, SonarCloud, Github
+C#, Azure Pipeline, PostgreSql, Angular, ASP.NET REST API, Serilog, SonarCloud, Github, Moq, XUnit, Trello
 
 <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/c%23_logo.png" height=75 width=75>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/sonarcloud_logo.png" height=75 width=225>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/Azure-Devops_logo.png" height=75 width=75>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/Angular_logo.png" height=75 width=75>      <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/PostgreSql_logo.png" height=75 width=75>
 
-<img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/github_logo.png" height=75 width=75>       <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/Serilog_logo.png" height=75 width=75>      <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/ASP.NET_logo.png" height=75 width=225>
+<img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/github_logo.png" height=75 width=75>       <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/Serilog_logo.png" height=75 width=75>      <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/ASP.NET_logo.png" height=75 width=225>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/trello_logo.png" height=75 width=75>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/xunit_logo.png" height=75 width=75>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/moq_logo.png" height=75 width=75>
 
 ***
 ## The OrgHunter CharityAPI
