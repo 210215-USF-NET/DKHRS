@@ -29,7 +29,7 @@ namespace GivHubDL.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("text");
 
-                    b.Property<int?>("Location_idId")
+                    b.Property<int?>("LocationId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Logourl")
@@ -46,7 +46,7 @@ namespace GivHubDL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Location_idId");
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Charities");
                 });
@@ -61,17 +61,17 @@ namespace GivHubDL.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
 
-                    b.Property<int?>("Charity_idId")
+                    b.Property<int?>("CharityId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("User_idId")
+                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Charity_idId");
+                    b.HasIndex("CharityId");
 
-                    b.HasIndex("User_idId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Donations");
                 });
@@ -107,12 +107,12 @@ namespace GivHubDL.Migrations
                     b.Property<string>("Phrase")
                         .HasColumnType("text");
 
-                    b.Property<string>("User_idId")
+                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("User_idId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("SearchHistories");
                 });
@@ -124,17 +124,17 @@ namespace GivHubDL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("Charity_idId")
+                    b.Property<int?>("CharityId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("User_idId")
+                    b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Charity_idId");
+                    b.HasIndex("CharityId");
 
-                    b.HasIndex("User_idId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Subscriptions");
                 });
@@ -202,50 +202,50 @@ namespace GivHubDL.Migrations
 
             modelBuilder.Entity("GivHubModels.Charity", b =>
                 {
-                    b.HasOne("GivHubModels.Location", "Location_id")
+                    b.HasOne("GivHubModels.Location", "Location")
                         .WithMany()
-                        .HasForeignKey("Location_idId");
+                        .HasForeignKey("LocationId");
 
-                    b.Navigation("Location_id");
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("GivHubModels.Donation", b =>
                 {
-                    b.HasOne("GivHubModels.Charity", "Charity_id")
+                    b.HasOne("GivHubModels.Charity", "Charity")
                         .WithMany()
-                        .HasForeignKey("Charity_idId");
+                        .HasForeignKey("CharityId");
 
-                    b.HasOne("GivHubModels.User", "User_id")
+                    b.HasOne("GivHubModels.User", "User")
                         .WithMany()
-                        .HasForeignKey("User_idId");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Charity_id");
+                    b.Navigation("Charity");
 
-                    b.Navigation("User_id");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GivHubModels.SearchHistory", b =>
                 {
-                    b.HasOne("GivHubModels.User", "User_id")
+                    b.HasOne("GivHubModels.User", "User")
                         .WithMany()
-                        .HasForeignKey("User_idId");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("User_id");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GivHubModels.Subscription", b =>
                 {
-                    b.HasOne("GivHubModels.Charity", "Charity_id")
+                    b.HasOne("GivHubModels.Charity", "Charity")
                         .WithMany()
-                        .HasForeignKey("Charity_idId");
+                        .HasForeignKey("CharityId");
 
-                    b.HasOne("GivHubModels.User", "User_id")
+                    b.HasOne("GivHubModels.User", "User")
                         .WithMany()
-                        .HasForeignKey("User_idId");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Charity_id");
+                    b.Navigation("Charity");
 
-                    b.Navigation("User_id");
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

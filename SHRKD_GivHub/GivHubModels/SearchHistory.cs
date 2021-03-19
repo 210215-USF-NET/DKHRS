@@ -11,7 +11,7 @@ namespace GivHubModels
         private string phrase;
         public int Id { get; set; }
 
-        public User User_id { get; set; }
+        public User User { get; set; }
 
         public string Phrase
         {

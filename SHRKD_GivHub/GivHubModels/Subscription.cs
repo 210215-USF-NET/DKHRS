@@ -11,8 +11,8 @@ namespace GivHubModels
 
         public int Id { get; set; }
 
-        public User User_id { get; set; }
+        public User User { get; set; }
 
-        public Charity Charity_id { get; set; }
+        public Charity Charity { get; set; }
     }
 }

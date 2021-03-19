@@ -28,7 +28,7 @@ namespace GivHubModels
             }
         }
 
-        public Location Location_id { get; set; }
+        public Location Location { get; set; }
         public string Missionstatement
         {
             get { return missionstatement; }
@@ -70,7 +70,7 @@ namespace GivHubModels
 
         public string Logourl
         {
-            get { return category; }
+            get { return logourl; }
             set
             {
                 if (value == null || value.Equals(""))
