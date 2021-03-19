@@ -30,7 +30,9 @@ GivHub is an Angular Web Application which helps ease the process of connecting 
 ***
 ## Technologies
 C#, Azure Pipeline, PostgreSql, Angular, ASP.NET REST API, Serilog, SonarCloud, Github
-![](https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/c%23_logo.png)
+<img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/c%23_logo.png" height=75 width=75> <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/Azure-Devops_logo.png" height=75 width=75> <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/Angular_logo.png" height=75 width=75> <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/PostgreSql_logo.png" height=75 width=75>
+<img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/Serilog_logo.png" height=75 width=75><img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/sonarcloud_logo.png" height=75 width=75><img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/github_logo.png" height=75 width=75><img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/ASP.NET_logo.png" height=75 width=75>
+
 ***
 ## The OrgHunter CharityAPI
 "The OrgHunter Charity API provides developers access to over 2M charities in our database, our charity API can easily be integrated into your application or website. We provide our charity data to over 1000 websites and mobile applications, making us the largest charity data provider on the market today!"
