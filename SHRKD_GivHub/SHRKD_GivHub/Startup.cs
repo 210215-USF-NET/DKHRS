@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GivHubDL;
 
 namespace SHRKD_GivHub
 {
@@ -26,8 +30,24 @@ namespace SHRKD_GivHub
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<GHDBContext>(options =>
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("GHDB")));
 
-            services.AddControllers();
+            //services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // set up cookies
+                options.Cookie.Name = ".GHDB.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.IsEssential = true;
+                options.Cookie.HttpOnly = true;
+            });
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+
             services.AddCors(
                 options =>
                 {
@@ -57,14 +77,19 @@ namespace SHRKD_GivHub
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SHRKD_GivHub v1"));
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
             app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseCors();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
