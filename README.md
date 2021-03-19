@@ -14,7 +14,7 @@ C#, Entity Framework, HTML, JavaScript, CSS, Angular, ASP.NET API, Azure Pipelin
 ElephantSql, Azure App Services, XUnit, Moq
 
 ## SonarCloud
-<img src="./SHRKD_GivHub/Images/sonarCloud_scrnsht.png">
+<img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/sonarCloud_scrnsht.png">
 
 ## Project Links
 Project Board: https://trello.com/b/RgJVvYtH/agile-sprint-board
