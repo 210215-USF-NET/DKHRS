@@ -23,6 +23,9 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: '210215-USF-NET_GivHub-By-SHRKD'
     projectName: 'GivHub-By-SHRKD'
+    extraProperties: |
+      sonar.exclusions=**/lib/**
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
@@ -41,7 +44,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
-    publishWebProjects: false
+    publishWebProjects: true
     zipAfterPublish: true
     projects: '**/SHRKD_GivHub/SHRKD_GivHub/*.csproj'
 - task: SonarCloudAnalyze@1
@@ -54,6 +57,6 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(583825bd-d55a-497c-bfe6-2e3972e128e2)'
     appType: 'webApp'
-    WebAppName: 'GivHub'
+    WebAppName: 'GivHubAPI'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
     AppSettings: '-WEBSITE_RUN_FROM_PACKAGE 0'
