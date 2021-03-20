@@ -24,11 +24,17 @@ C#, Azure Pipeline, PostgreSql, Angular, ASP.NET REST API, Serilog, SonarCloud, 
 
 ## Project Links
 Project Board: https://trello.com/b/RgJVvYtH/agile-sprint-board
+
 Burndown Chart: https://docs.google.com/spreadsheets/d/14eGOxzer8qtBAn1_fHRhGWvUrPGHjpLC2H4sQOAkyRE/edit#gid=0
+
 SonarCloud: https://sonarcloud.io/dashboard?id=210215-USF-NET_GivHub-By-SHRKD
+
 Web App Link: http://givhub.azurewebsites.net/
+
 CharityAPI: http://charityapi.orghunter.com/
+
 Proposal: https://docs.google.com/document/d/1pUdPunBqKLvRkw5Z_tJYfHhTy9KAxHMORz-U8tJ9VrE/edit#
+
 Presentation: https://docs.google.com/presentation/d/19hezvOBl687k-fop5LoFJ0Kfc13sslzJUtTbCBkVQ70/edit#slide=id.p
 
 
