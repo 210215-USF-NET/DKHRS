@@ -33,7 +33,7 @@ Web App Link: http://givhub.azurewebsites.net/
 
 CharityAPI: http://charityapi.orghunter.com/
 
-Proposal: https://docs.google.com/document/d/1pUdPunBqKLvRkw5Z_tJYfHhTy9KAxHMORz-U8tJ9VrE/edit#
+Proposal: https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/Proposal.md
 
 Presentation: https://docs.google.com/presentation/d/19hezvOBl687k-fop5LoFJ0Kfc13sslzJUtTbCBkVQ70/edit#slide=id.p
 
