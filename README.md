@@ -1,31 +1,25 @@
 # GIVHUB By SHRKD
 
-GivHub is an Angular Web Application which helps ease the process of connecting users to charities. GivHub can be used to discover charities who support causes that are of interest to our users. Users may create an account in order to subscribe to charity pages, giving you streamlined access to relevant articles, reviews, charity support pages, and other important info.  
+GivHub is an Angular Web Application that assists users in fullfilling their charitable aspirations. With access to data on over 2 million charities, GivHub can be used to discover organizations supporting many causes. By creating an account, one may subscribe to charity pages, establishing a singular hub linking users to operations of personalized interest.  We expect to attract donators who lack experience in determining quality organizations, so we are including a best-practices page informing our users how to ascertain that their contributions will best reach their conerns.  For our users' convenience, we will maintain records of their donations; assisting them in reaching annual goals.  A planned social feature will expose friends to eachothers interests, as well as connect like-concerned individuals within a regional proximity.  Finally, with a backlog of features focused on being ever-more informative to our users, our team hopes to become a reliable resource for those interested in commiting charitable contributions.
 
 ## Contributors
 - Steven Imas (Testing, Logging, Quality Assurance)
+  - <List>
 - Hans Mittig (DL, BL)
+  - <List>
 - Rich Hakes (Scrum Master, VCS, [BL,DL,QA])
+  - <List>
 - Kevin Murphy (Front-End, BL)
+  - <List>
 - Douglas Richardson (Dev-Ops, Front-End, BL)
+  - <List>
 
 ## Technologies
-C#, Entity Framework, HTML, JavaScript, CSS, Angular, ASP.NET API, Azure Pipelines,
-ElephantSql, Azure App Services, XUnit, Moq
+C#, Azure Pipeline, PostgreSql, Angular, ASP.NET REST API, Serilog, SonarCloud, Github, Moq, XUnit, Trello
 
-## SonarCloud
-<img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/sonarCloud_scrnsht.png" height=500 width=500>
+<img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/c%23_logo.png" height=75 width=75>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/sonarcloud_logo.png" height=75 width=225>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/Azure-Devops_logo.png" height=75 width=75>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/Angular_logo.png" height=75 width=75>      <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/PostgreSql_logo.png" height=75 width=75>
 
-
-## Burndown Chart
-<figure class="video_container"  >
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTKXm9koMNp_zOLL7lKwCQBzC0y2FOUd5watLt7QRU6vbn30XDD2tvG5CU2hlsAp-VQU9GOsyR9eeK6/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" height=1200 width=1200></iframe>
-</figure>
-
-## Presentation
-<figure>
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQH3b7L7mJ1F9b9-kT4kRGiFc1Axv256_Cvqy5UOek0eD_nBFavyASCGoP4fXWZNCp4rY3287MGM3GI/embed?start=false&loop=true&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-</figure>
+<img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/github_logo.png" height=75 width=75>       <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/Serilog_logo.png" height=75 width=75>      <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/ASP.NET_logo.png" height=75 width=225>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/trello_logo.png" height=75 width=75>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/xunit_logo.png" height=75 width=75>     <img src="https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/SHRKD_GivHub/SHRKD_GivHub/Images/moq_logo.png" height=75 width=75>
 
 
 ## Project Links
