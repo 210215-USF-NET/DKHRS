@@ -1,13 +1,13 @@
 # GivHub by SHRKD
 ## Overview
-GivHub is an Angular Web Application which helps ease the process of connecting users to charities. GivHub can be used to discover charities who support causes that are of interest to our users. Users may create an account in order to subscribe to charity pages, giving you streamlined access to relevant articles, reviews, charity support pages, and other important info.  
+GivHub will be an Angular Web Application that assists users in fullfilling their charitable aspirations. With access to data on over 2 million charities, GivHub can be used to discover organizations supporting many causes. By creating an account, one may subscribe to charity pages, establishing a singular hub linking users to operations of personalized interest.  We expect to attract donators who lack experience in determining quality organizations, so we are including a best-practices page informing our users how to ascertain that their contributions will best reach their conerns.  For our users' convenience, we will maintain records of their donations; assisting them in reaching annual goals.  A planned social feature will expose friends to eachothers interests, as well as connect like-concerned individuals within a regional proximity.  Finally, with a backlog of features focused on being ever-more informative to our users, our team hopes to become a reliable resource for those interested in commiting charitable contributions.
 ***
-### Team
-#### Steven
-#### Hans
-#### Rich
-#### Kevin
-#### Douglas
+## Team Member Roles
+#### Steven - Testing, Logging, Quality Assurance
+#### Hans - Data layer, Database
+#### Rich - Scrum Master, Documentation, Version Control, (BL, DL, QA)
+#### Kevin - Front-End, Business Logic
+#### Douglas - Dev-Ops, Front-End, Business Logic
 ***
 ## Features
 ### - MVP
@@ -17,8 +17,8 @@ GivHub is an Angular Web Application which helps ease the process of connecting 
 - Subscribe to charities
 - Link to charity donation and home pages
 - Home page with list of popular charities
-- Discovery feature of popular, topical, etc. charities
-- Informative page for donating tips
+- Discovery feature for popular, topical, etc. charities
+- Best-Practices page to assist users in making informed donations 
 - Account feature to track donation goals
 - Recommend users to like-charities based on their subscriptions
 - Documentation of user donations available in their account
