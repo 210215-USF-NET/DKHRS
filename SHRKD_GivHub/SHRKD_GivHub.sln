@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GivHubModels", "GivHubModel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GivHubBL", "GivHubBL\GivHubBL.csproj", "{5C4D562F-06F3-4374-A003-BA5FFF13FE81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GivHubDL", "GivHubDL\GivHubDL.csproj", "{7BE1C748-DBA2-4F03-AA72-BCB316D1ED04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GivHubDL", "GivHubDL\GivHubDL.csproj", "{7BE1C748-DBA2-4F03-AA72-BCB316D1ED04}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GivHubTests", "GivHubTests\GivHubTests.csproj", "{E7C3D27F-E034-489F-AAD8-6557109F5BBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7BE1C748-DBA2-4F03-AA72-BCB316D1ED04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BE1C748-DBA2-4F03-AA72-BCB316D1ED04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BE1C748-DBA2-4F03-AA72-BCB316D1ED04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7C3D27F-E034-489F-AAD8-6557109F5BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7C3D27F-E034-489F-AAD8-6557109F5BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7C3D27F-E034-489F-AAD8-6557109F5BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7C3D27F-E034-489F-AAD8-6557109F5BBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
