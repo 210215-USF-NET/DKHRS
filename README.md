@@ -23,7 +23,6 @@ C#, Azure Pipeline, PostgreSql, Angular, ASP.NET REST API, Serilog, SonarCloud, 
 
 
 ## Project Links
-Project Board: https://trello.com/b/RgJVvYtH/agile-sprint-board
 
 Burndown Chart: https://docs.google.com/spreadsheets/d/14eGOxzer8qtBAn1_fHRhGWvUrPGHjpLC2H4sQOAkyRE/edit#gid=0
 
