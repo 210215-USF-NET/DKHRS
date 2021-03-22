@@ -2,7 +2,8 @@
 
 namespace GivHubDL
 {
-    public class Class1
+    public class GHRepoDB
     {
+
     }
 }

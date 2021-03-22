@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GivHubDL;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace GivHubDL
 {
-    public class GHDBContext : DbContext
+    public class GHDBContext : IdentityDbContext
     {
         public GHDBContext(DbContextOptions options) : base(options)
         {
