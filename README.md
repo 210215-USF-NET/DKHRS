@@ -24,7 +24,7 @@ C#, Azure Pipeline, PostgreSql, Angular, ASP.NET REST API, Serilog, SonarCloud, 
 
 ## Project Links
 
-Burndown Chart: https://docs.google.com/spreadsheets/d/14eGOxzer8qtBAn1_fHRhGWvUrPGHjpLC2H4sQOAkyRE/edit#gid=0
+Burndown Chart: https://docs.google.com/spreadsheets/d/14eGOxzer8qtBAn1_fHRhGWvUrPGHjpLC2H4sQOAkyRE/edit?usp=sharing
 
 SonarCloud: https://sonarcloud.io/dashboard?id=210215-USF-NET_GivHub-By-SHRKD
 
