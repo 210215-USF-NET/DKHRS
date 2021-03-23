@@ -1,12 +1,15 @@
-﻿using System;
+﻿using GivHubModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GivHubDL
+namespace GivHubBL
 {
-    interface IGHRepo
+    interface IGHBL
     {
+
+
     }
 }
