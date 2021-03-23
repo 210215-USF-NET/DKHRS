@@ -19,8 +19,6 @@ namespace GivHubDL
         public GHDBContext()
         {
         }
-
-        //public DbSet<User> Users { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Charity> Charities { get; set; }
         public DbSet<SearchHistory> SearchHistories { get; set; }

@@ -8,7 +8,6 @@ namespace GivHubModels
 {
     public class Donation
     {
-        private decimal amount;
         public int Id { get; set; }
 
         public User User { get; set; }
