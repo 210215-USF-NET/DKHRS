@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
-    interface ILocationRepo
+    public interface ILocationRepo
     {
             Task<Location> AddLocationAsync(Location newLoc);
             Task<Location> DeleteLocationAsync(Location location2BDeleted);

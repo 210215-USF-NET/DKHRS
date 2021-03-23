@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
-    interface ISearchHistoryRepo
+    public interface ISearchHistoryRepo
     {
         Task<SearchHistory> AddSearchHistoryAsync(SearchHistory newSearch);
         Task<SearchHistory> DeleteSearchHistoryAsync(SearchHistory search2BDeleted);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
-    class LocationRepoDB : ILocationRepo
+    public class LocationRepoDB : ILocationRepo
     {
         private readonly GHDBContext _context;
         public LocationRepoDB(GHDBContext context)

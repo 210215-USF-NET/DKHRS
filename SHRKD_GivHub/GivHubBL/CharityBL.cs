@@ -8,8 +8,8 @@ namespace GivHubBL
 {
     public class CharityBL : ICharityBL
     {
-        private ICharityRepository _repo;
-        public CharityBL(ICharityRepository repo)
+        private ICharityRepo _repo;
+        public CharityBL(ICharityRepo repo)
         {
             _repo = repo;
         }
