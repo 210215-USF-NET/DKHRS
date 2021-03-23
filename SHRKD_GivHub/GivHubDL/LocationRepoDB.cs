@@ -30,7 +30,7 @@ namespace GivHubDL
         public async Task<Location> GetLocationByCityStateAsync(string city, string state)
         {
             return await _context.Locations
-                .FirstOrDefaultAsync(location => location.City == city);
+                .FirstOrDefaultAsync(location => location.City == city && location.State == state);
         }
         public async Task<Location> GetLocationByIdAsync(int id)
         {
