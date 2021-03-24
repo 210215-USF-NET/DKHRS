@@ -13,6 +13,7 @@ namespace GivHubModels
         private string website;
         private string category;
         private string logourl;
+        private string eid;
 
         public int Id { get; set; }
         public string Name
@@ -78,6 +79,19 @@ namespace GivHubModels
                     throw new Exception("URL must not be null.");
                 }
                 logourl = value;
+            }
+        }
+
+        public string EID
+        {
+            get { return eid; }
+            set
+            {
+                if (value == null || value.Equals(""))
+                {
+                    throw new Exception("eid must not be null.");
+                }
+                eid = value;
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GivHubBL;
+using GivHubModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,81 +9,107 @@ using System.Threading.Tasks;
 
 namespace SHRKD_GivHub.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CharityController : Controller
     {
-        // GET: CharityController
-        public ActionResult Index()
+
+        private readonly ICharityBL _charBL;
+
+        public CharityController(ICharityBL charBL)
         {
-            return View();
+            _charBL = charBL;
         }
 
-        // GET: CharityController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: CharityController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CharityController/Create
+        //POST
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [Consumes("application/json")]
+        public async Task<IActionResult> AddCharityAsync([FromBody] Charity charity)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await _charBL.AddCharityAsync(charity);
+                return CreatedAtAction("AddCharity", charity);
             }
             catch
             {
-                return View();
+                return StatusCode(400);
             }
         }
 
-        // GET: CharityController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CharityController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // DELETE api/<ChairtyController>/
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCharityAsync(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var charity = await _charBL.GetCharityByIdAsync(id);
+                await _charBL.DeleteCharityAsync(charity);
+                return NoContent();
             }
             catch
             {
-                return View();
+                return StatusCode(500);
             }
         }
 
-        // GET: CharityController/Delete/5
-        public ActionResult Delete(int id)
+        //GET api/<LocationController>/
+        [HttpGet]
+        public async Task<IActionResult> GetLocationsAsync()
         {
-            return View();
+            return Ok(await _charBL.GetCharitiesAsync());
         }
 
-        // POST: CharityController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [HttpGet("category")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetCharitiesByCategoryAsync(string category)
+        {
+            var charities = await _charBL.GetCharitiesByCategoryAsync(category);
+            if (charities == null) return NotFound();
+            return Ok(charities);
+        }
+
+        [HttpGet("{id}")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetCharityByIdAsync(int id)
+        {
+            var charity = await _charBL.GetCharityByIdAsync(id);
+            if (charity == null) return NotFound();
+            return Ok(charity);
+        }
+
+        [HttpGet("name")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetCharityByNameAsync(string name)
+        {
+            var charity = await _charBL.GetCharityByNameAsync(name);
+            if (charity == null) return NotFound();
+            return Ok(charity);
+        }
+
+        [HttpGet("website")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetCharityByWebsiteAsync(string website)
+        {
+            var charity = await _charBL.GetCharityByWebsiteAsync(website);
+            if (charity == null) return NotFound();
+            return Ok(charity);
+        }
+
+        //PUT api/<LocationController>/
+        [HttpPut]
+        public async Task<IActionResult> UpdateCharityAsync(Charity charity)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                await _charBL.UpdateCharityAsync(charity);
+                return NoContent();
             }
             catch
             {
-                return View();
+                return StatusCode(500);
             }
         }
+
     }
 }
