@@ -15,7 +15,6 @@ namespace SHRKD_GivHub.Controllers
     {
         private readonly ILocationBL _locBL;
 
-        private readonly ILogger<LocationController> _logger;
 
         public LocationController(ILocationBL locBL)
         {
@@ -64,6 +63,7 @@ namespace SHRKD_GivHub.Controllers
             return Ok(location);
         }
 
+        //GET api/<LocationController>/
         [HttpGet("{id}")]
         [Produces("application/json")]
         public async Task<IActionResult> GetLocationByIdAsync(int id)
@@ -73,14 +73,15 @@ namespace SHRKD_GivHub.Controllers
             return Ok(location);
         }
 
+        //GET api/<LocationController>/
         [HttpGet]
         public async Task<IActionResult> GetLocationsAsync()
         {
             return Ok(await _locBL.GetLocationsAsync());
         }
 
+        //PUT api/<LocationController>/
         [HttpPut]
-        //[Route("UpdateLocation/{id}")]
         public async Task<IActionResult> UpdateLocationAsync(Location location)
         {
             try
