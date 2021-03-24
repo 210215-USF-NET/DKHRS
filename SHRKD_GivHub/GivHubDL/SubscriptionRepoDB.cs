@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
-    public class SubscriptionRepoDB
+    public class SubscriptionRepoDB : ISubscriptionRepo
     {
         private readonly GHDBContext _context;
         public SubscriptionRepoDB(GHDBContext context)

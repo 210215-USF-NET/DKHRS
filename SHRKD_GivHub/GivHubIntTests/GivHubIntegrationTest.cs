@@ -3,16 +3,25 @@ using System;
 using GivHubModels;
 using Microsoft.EntityFrameworkCore;
 using GivHubDL;
+using GivHubBL;
 
 namespace GivHubTests
 {
     [TestClass]
     public class GivHubIntegrationTest
+    /*
+
+        Arrange is all about setting up the things u need for the test.
+        Act is doing the thing u wanna test
+        Assert is comparing the actual results to the expected outcome
+
+     */
     {
 
         [TestMethod]
-        public void SendDonation_ShouldFail_WhenAmountIsZero()
+        public async System.Threading.Tasks.Task AddDonationASync_ShouldFail_WhenAmountIsZero()
         {   //arrange 
+
 
             var options = new DbContextOptionsBuilder<GHDBContext>()
                 .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
@@ -20,80 +29,79 @@ namespace GivHubTests
             var ghDBContext = new GHDBContext(options);
 
             decimal amount = 0m;
-            int? userID = null;
-            int? charityID = null;
-
+            int userID = 1;
+            int charityID = 1;
+            DonationRepoDB donationRepoDB = new DonationRepoDB(ghDBContext);
+            DonationBL donationBL = new DonationBL(donationRepoDB);
             Donation donation = new Donation();
-
+            donation.Amount = amount;
             //            var options = new DbContextOptionsBuilder<DrinkDBContext>()
             //     .UseNpgsql("Host = ziggy.db.elephantsql.com; Port = 5432; Database = diijqqsl; Username = diijqqsl; Password = 95ILlqxg9G1qwYYI4V8ZlFe7lh2z499K;")
             //		.Options;
 
             //act
-            var result = donation.Amount;
+            var result = await donationBL.AddDonationAsync(donation);
 
 
             //assert
-           // Assert.IsTrue(donation.Amount.Any());
+           //  Assert.IsTrue(donation.Amount.Any());
         }
 
         [TestMethod]
-        public void SendDonation_ShouldFail_WhenAmountIsNotDecimal()
-        {   //arrange
-
-
-            decimal? amount = null;
-            int? userID = null;
-            int? charityID = null;
-            var options = new DbContextOptionsBuilder<GHDBContext>()
-            .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-            .Options;
-
-            Donation donation = new Donation();
-
-
-
-            //WILL THIS EVEN PASS?
-        }
-
-        [TestMethod]
-        public void SendDonation_ShouldSucceed_WhenDonationIsGreaterThanZero()
+        public async System.Threading.Tasks.Task AddDonation_ShouldSucceed_WhenDonationIsGreaterThanZeroAsync()
         {
             //arrange
-            decimal amount = 1m;
-            int? userID = null;
-            int? charityID = null;
+            decimal amount = 3m;
+            int userID = 1;
+            int charityID = 1;
+
 
             var options = new DbContextOptionsBuilder<GHDBContext>()
             .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
             .Options;
 
+            var ghDBContext = new GHDBContext(options);
+            DonationRepoDB donationRepoDB = new DonationRepoDB(ghDBContext);
+            DonationBL donationBL = new DonationBL(donationRepoDB);
             Donation donation = new Donation();
+            donation.Amount = amount;
+
+            //act
+            var result = await donationBL.AddDonationAsync(donation);
+
+            //assert
+            Assert.IsNotNull(donation.Amount);
+
 
         }
 
         [TestMethod]
-        public void GetSearchHistory_ShouldSucceed_WhenPhraseIsNotNull()
+        public async System.Threading.Tasks.Task GetSearchHistoriesAsync_ShouldSucceed_WhenPhraseIsNotNullAsync()
         {
 
             //arrange
             int? userID = null;
             string phrase = "Phrase";
-
             var options = new DbContextOptionsBuilder<GHDBContext>()
             .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
             .Options;
 
+            var ghDBContext = new GHDBContext(options);
+            SearchHistoryRepoDB searchHistoryRepoDB = new SearchHistoryRepoDB(ghDBContext);
+            SearchHistoryBL searchHistoryBL = new SearchHistoryBL(searchHistoryRepoDB);
             SearchHistory searchHistory = new SearchHistory();
+            searchHistory.Phrase = phrase;
 
             //act
+            var result = await searchHistoryBL.GetSearchHistoriesAsync();
             //assert
+            Assert.IsNotNull(searchHistory.Phrase);
         }
 
         [TestMethod]
         //[ExpectedException(typeof(Exception))]
         //
-        public void GetSearchHistory_ShouldFail_WhenPhraseIsNull()
+        public void GetSearchHistories_ShouldFail_WhenPhraseIsNull()
         {
             try
             {
@@ -134,68 +142,9 @@ namespace GivHubTests
             //assert
 
         }
+        //test when everything is not null 
 
 
-
-
-
-        [TestMethod]
-        public void CreateAccount_ShouldCreate_WhenFirstNameIsNotNull()
-        {
-            //arrange
-            string firstName = "firstName";
-            string lastName = null;
-            string email = null;
-            int locationID = 1;
-
-            var options = new DbContextOptionsBuilder<GHDBContext>()
-            .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-            .Options;
-
-            //is it worth it to test locationID = null;?	
-
-            //act
-            
-            //assert
-        }
-
-        [TestMethod]
-        public void CreateAccount_ShouldCreate_WhenLastNameIsNotNull()
-        {
-            //arrange
-            string firstName = null;
-            string lastName = "lastName";
-            string email = null;
-            int locationID = 1;
-
-            var options = new DbContextOptionsBuilder<GHDBContext>()
-            .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-            .Options;
-
-            //is it worth it to test locationID = null;?	
-
-            //act
-            //assert
-        }
-
-        [TestMethod]
-        public void CreateAccount_ShouldCreate_WhenEmailIsNotNull()
-        {
-            //arrange
-            string firstName = "firstName";
-            string lastName = null;
-            string email = null;
-            int locationID = 1;
-
-            var options = new DbContextOptionsBuilder<GHDBContext>()
-            .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-            .Options;
-
-            //is it worth it to test locationID = null;?	
-
-            //act
-            //assert
-        }
 
         [TestMethod]
         public void CreateAccount_ShouldReturnNull_WhenLastNameIsNull()
