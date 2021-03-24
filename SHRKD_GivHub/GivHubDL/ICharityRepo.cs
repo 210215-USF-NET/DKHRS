@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
-    interface ICharityRepo
+    public interface ICharityRepo
     {
         Task<Charity> AddCharityAsync(Charity newCharity);
         Task<Charity> DeleteCharityAsync(Charity charity2BDeleted);

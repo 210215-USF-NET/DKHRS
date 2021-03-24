@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
-    interface ISubscriptionRepo
+    public interface ISubscriptionRepo
     {
         Task<Subscription> AddSubscriptionAsync(Subscription newSub);
         Task<Subscription> DeleteSubscriptionAsync(Subscription sub2BDeleted);

@@ -10,9 +10,9 @@ namespace GivHubBL
 {
     public class DonationBL : IDonationBL
     {
-        private IDonationRepository _repo;
+        private IDonationRepo _repo;
 
-        public DonationBL(IDonationRepository repo)
+        public DonationBL(IDonationRepo repo)
         {
             _repo = repo;
         }
@@ -23,7 +23,7 @@ namespace GivHubBL
 
         public async Task<Donation> DeleteDonationAsync(Donation donation2BDeleted)
         {
-            return await _repo.DeleteDontationAsync(donation2BDeleted);
+            return await _repo.DeleteDonationAsync(donation2BDeleted);
         }
 
         public async Task<Donation> GetDonationByIdAsync(int id)

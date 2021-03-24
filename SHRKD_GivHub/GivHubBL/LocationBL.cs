@@ -10,8 +10,8 @@ namespace GivHubBL
 {
     public class LocationBL : ILocationBL
     {
-        private ILocationRepository _repo;
-        public LocationBL(ILocationRepository repo)
+        private ILocationRepo _repo;
+        public LocationBL(ILocationRepo repo)
         {
             _repo = repo;
         }

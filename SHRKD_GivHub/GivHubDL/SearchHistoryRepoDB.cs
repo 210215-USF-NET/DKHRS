@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
-    class SearchHistoryRepoDB :ISearchHistoryRepo
+    public class SearchHistoryRepoDB :ISearchHistoryRepo
     {
         private readonly GHDBContext _context;
         public SearchHistoryRepoDB(GHDBContext context)

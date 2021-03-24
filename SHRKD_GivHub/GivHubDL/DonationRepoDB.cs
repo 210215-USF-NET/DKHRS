@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
-    class DonationRepoDB
+    public class DonationRepoDB
     {
         private readonly GHDBContext _context;
         public DonationRepoDB(GHDBContext context)

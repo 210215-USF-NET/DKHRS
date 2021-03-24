@@ -10,14 +10,14 @@ namespace GivHubBL
 {
     public class SubscriptionBL : ISubscriptionBL
     {
-        private ISubscriptionRepository _repo;
-        public SubscriptionBL(ISubscriptionRepository repo)
+        private ISubscriptionRepo _repo;
+        public SubscriptionBL(ISubscriptionRepo repo)
         {
             _repo = repo;
         }
         public async Task<Subscription> AddSubscriptionAsync(Subscription newSub)
         {
-            return await await _repo.AddSubscriptionAsync(newSub);
+            return await _repo.AddSubscriptionAsync(newSub);
         }
 
         public async Task<Subscription> DeleteSubscriptionAsync(Subscription sub2BDeleted)
