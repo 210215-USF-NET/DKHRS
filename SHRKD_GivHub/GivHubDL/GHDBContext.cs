@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace GivHubDL
 {
-    public class GHDBContext : IdentityDbContext
+    public class GHDBContext : DbContext
     {
         public GHDBContext(DbContextOptions options) : base(options)
         {
@@ -27,7 +27,16 @@ namespace GivHubDL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Charity>().Property(x => x.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Location>().Property(x => x.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Donation>().Property(x => x.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<SearchHistory>().Property(x => x.Id).ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Subscription>().Property(x => x.Id).ValueGeneratedOnAdd();
         }
     }
 }

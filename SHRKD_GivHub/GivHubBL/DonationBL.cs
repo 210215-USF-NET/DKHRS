@@ -41,9 +41,9 @@ namespace GivHubBL
             return await _repo.GetDonationsByCharityAsync(charity);
         }
 
-        public async Task<List<Donation>> GetDonationsByUserAsync(User user)
+        public async Task<List<Donation>> GetDonationsByUserAsync(string email)
         {
-            return await _repo.GetDonationsByUserAsync(user);
+            return await _repo.GetDonationsByUserAsync(email);
         }
 
         public async Task<Donation> UpdateDonationAsync(Donation donation2BUpdated)

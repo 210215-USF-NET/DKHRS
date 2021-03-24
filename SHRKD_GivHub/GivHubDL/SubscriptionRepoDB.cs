@@ -34,9 +34,9 @@ namespace GivHubDL
                 .Select(subs => subs)
                 .ToListAsync();
         }
-        public async Task<List<Subscription>> GetSubscriptionsByUserAsync(User user)
+        public async Task<List<Subscription>> GetSubscriptionsByUserAsync(string email)
         {
-            return await _context.Subscriptions.Select(subs => subs).Where(subs => subs.User == user).ToListAsync();
+            return await _context.Subscriptions.Select(subs => subs).Where(subs => subs.Email == email).ToListAsync();
         }
         public async Task<Subscription> UpdateSubscriptionAsync(Subscription sub2BUpdated)
         {
