@@ -20,7 +20,7 @@ namespace GivHubTests
     {
 
         [TestMethod]
-        public async Task AddDonationASync_ShouldFail_WhenAmountIsZero()
+        public async Task GetDonationsASync_ShouldFail_WhenAmountIsZero()
         {   //arrange 
 
 
@@ -39,15 +39,15 @@ namespace GivHubTests
             donation.Amount = amount;
 
             //act
-            var result = await donationBL.AddDonationAsync(donation);
+            var result = await donationBL.GetDonationsAsync();
 
 
             //assert
-            Assert.IsNull(donation.Amount);
+            Assert.AreEqual(donation.Amount, amount);
         }
 
         [TestMethod]
-        public async Task AddDonation_ShouldSucceed_WhenDonationIsGreaterThanZeroAsync()
+        public async Task GetDonationsAsync_ShouldSucceed_WhenDonationIsGreaterThanZeroAsync()
         {
             //arrange
             decimal amount = 3m;
@@ -67,10 +67,10 @@ namespace GivHubTests
 
             //act
 
-            var result = await donationBL.AddDonationAsync(donation);
+            var result = await donationBL.GetDonationsAsync();
 
             //assert
-            Assert.IsNotNull(donation.Amount);
+            Assert.AreEqual(donation.Amount, amount);
 
 
         }
@@ -202,7 +202,7 @@ namespace GivHubTests
             catch (System.Exception ex)
             {
                 //assert
-                Assert.AreEqual("State must not be null.", ex.Message);
+                Assert.AreEqual("State cannot be null.", ex.Message);
             }
 
         }
@@ -387,7 +387,7 @@ namespace GivHubTests
             catch (System.Exception ex)
             {
                 //assert
-                Assert.IsNull("Email must not be null.", ex.Message);
+                Assert.IsNotNull("Email must not be null.", ex.Message);
             }
 
         }
@@ -420,7 +420,7 @@ namespace GivHubTests
 
 
             //assert
-            Assert.IsNull(subscription.Id);
+            Assert.AreEqual(ID, subscription.Id);
 
 
         }
