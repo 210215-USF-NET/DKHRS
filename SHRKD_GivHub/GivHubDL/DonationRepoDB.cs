@@ -43,6 +43,12 @@ namespace GivHubDL
         {
             return await _context.Donations.Select(donation => donation).Where(donation => donation.Charity == charity).ToListAsync();
         }
+
+        public Task<List<Donation>> GetDonationsByUserAsync(string email)
+        {
+            throw new NotImplementedException();
+        }
+
         //public async Task<List<Donation>> GetDonationsByUserAsync(string email)
         //{
         //    return await _context.Donations.Select(donations => donations).Where(donations => donations.Email == email).ToListAsync();
