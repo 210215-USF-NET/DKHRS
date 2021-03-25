@@ -52,5 +52,7 @@ namespace GivHubModels
             }
         }
 
+        //public virtual ICollection<Charity> Charities { get; set; }
+
     }
 }

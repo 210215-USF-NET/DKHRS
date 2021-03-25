@@ -29,8 +29,12 @@ namespace GivHubDL
         {
 
             modelBuilder.Entity<Charity>().Property(x => x.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Charity>()
+                .HasOne(charity => charity.Location)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Location>().Property(x => x.Id).ValueGeneratedOnAdd();
+      
 
             modelBuilder.Entity<Donation>().Property(x => x.Id).ValueGeneratedOnAdd();
 
