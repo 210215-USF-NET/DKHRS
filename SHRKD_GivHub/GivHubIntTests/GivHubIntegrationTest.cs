@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace GivHubTests
 {
     [TestClass]
-    public class GivHubIntegrationTest
+    public class GivHubIntegrationTests
     /*
 
         Arrange is all about setting up the things u need for the test.
