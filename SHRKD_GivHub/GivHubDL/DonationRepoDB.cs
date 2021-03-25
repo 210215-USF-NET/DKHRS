@@ -43,10 +43,10 @@ namespace GivHubDL
         {
             return await _context.Donations.Select(donation => donation).Where(donation => donation.Charity == charity).ToListAsync();
         }
-        public async Task<List<Donation>> GetDonationsByUserAsync(User user)
-        {
-            return await _context.Donations.Select(donations => donations).Where(donations => donations.User == user).ToListAsync();
-        }
+        //public async Task<List<Donation>> GetDonationsByUserAsync(string email)
+        //{
+        //    return await _context.Donations.Select(donations => donations).Where(donations => donations.Email == email).ToListAsync();
+        //}
         public async Task<Donation> UpdateDonationAsync(Donation donation2BUpdated)
         {
             Donation olddonation = await _context.Donations.FindAsync(donation2BUpdated.Id);

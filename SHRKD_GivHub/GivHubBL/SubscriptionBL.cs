@@ -30,9 +30,9 @@ namespace GivHubBL
             return await _repo.GetSubscriptionsAsync();
         }
 
-        public async Task<List<Subscription>> GetSubscriptionsByUserAsync(User user)
+        public async Task<List<Subscription>> GetSubscriptionsByUserAsync(string email)
         {
-            return await _repo.GetSubscriptionsByUserAsync(user);
+            return await _repo.GetSubscriptionsByUserAsync(email);
         }
 
         public async Task<Subscription> UpdateSubscriptionAsync(Subscription sub2BUpdated)
