@@ -4,6 +4,7 @@ using GivHubModels;
 using Microsoft.EntityFrameworkCore;
 using GivHubDL;
 using GivHubBL;
+using System.Threading.Tasks;
 
 namespace GivHubTests
 {
@@ -19,7 +20,7 @@ namespace GivHubTests
     {
 
         [TestMethod]
-        public async System.Threading.Tasks.Task AddDonationASync_ShouldFail_WhenAmountIsZero()
+        public async Task AddDonationASync_ShouldFail_WhenAmountIsZero()
         {   //arrange 
 
 
@@ -29,31 +30,28 @@ namespace GivHubTests
             var ghDBContext = new GHDBContext(options);
 
             decimal amount = 0m;
-            int userID = 1;
-            int charityID = 1;
+            int donationID = 1;
+       
             DonationRepoDB donationRepoDB = new DonationRepoDB(ghDBContext);
             DonationBL donationBL = new DonationBL(donationRepoDB);
             Donation donation = new Donation();
+            donation.Id = donationID;
             donation.Amount = amount;
-            //            var options = new DbContextOptionsBuilder<DrinkDBContext>()
-            //     .UseNpgsql("Host = ziggy.db.elephantsql.com; Port = 5432; Database = diijqqsl; Username = diijqqsl; Password = 95ILlqxg9G1qwYYI4V8ZlFe7lh2z499K;")
-            //		.Options;
 
             //act
             var result = await donationBL.AddDonationAsync(donation);
 
 
             //assert
-           //  Assert.IsTrue(donation.Amount.Any());
+             Assert.IsNull(donation.Amount);
         }
 
         [TestMethod]
-        public async System.Threading.Tasks.Task AddDonation_ShouldSucceed_WhenDonationIsGreaterThanZeroAsync()
+        public async Task AddDonation_ShouldSucceed_WhenDonationIsGreaterThanZeroAsync()
         {
             //arrange
             decimal amount = 3m;
-            int userID = 1;
-            int charityID = 1;
+            int donationID = 1;
 
 
             var options = new DbContextOptionsBuilder<GHDBContext>()
@@ -65,8 +63,10 @@ namespace GivHubTests
             DonationBL donationBL = new DonationBL(donationRepoDB);
             Donation donation = new Donation();
             donation.Amount = amount;
+            donation.Id = donationID;
 
             //act
+            
             var result = await donationBL.AddDonationAsync(donation);
 
             //assert
@@ -76,11 +76,11 @@ namespace GivHubTests
         }
 
         [TestMethod]
-        public async System.Threading.Tasks.Task GetSearchHistoriesAsync_ShouldSucceed_WhenPhraseIsNotNullAsync()
+        public async Task GetSearchHistoriesAsync_ShouldSucceed_WhenPhraseIsNotNullAsync()
         {
 
             //arrange
-            int? userID = null;
+            int iD = 1;
             string phrase = "Phrase";
             var options = new DbContextOptionsBuilder<GHDBContext>()
             .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
@@ -91,6 +91,7 @@ namespace GivHubTests
             SearchHistoryBL searchHistoryBL = new SearchHistoryBL(searchHistoryRepoDB);
             SearchHistory searchHistory = new SearchHistory();
             searchHistory.Phrase = phrase;
+            searchHistory.Id = iD;
 
             //act
             var result = await searchHistoryBL.GetSearchHistoriesAsync();
@@ -101,20 +102,28 @@ namespace GivHubTests
         [TestMethod]
         //[ExpectedException(typeof(Exception))]
         //
-        public void GetSearchHistories_ShouldFail_WhenPhraseIsNull()
+        public async Task GetSearchHistoriesAsync_ShouldFail_WhenPhraseIsNullAsync()
         {
             try
             {
                 //arrange
-                int? userID = null;
+                int iD = 1;
                 string phrase = null;
                 var options = new DbContextOptionsBuilder<GHDBContext>()
                   .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
                    .Options;
-                SearchHistory searchHistory = new SearchHistory();
 
+                var ghDBContext = new GHDBContext(options);
+                SearchHistoryRepoDB searchHistoryRepoDB = new SearchHistoryRepoDB(ghDBContext);
+                SearchHistoryBL searchHistoryBL = new SearchHistoryBL(searchHistoryRepoDB);
+                SearchHistory searchHistory = new SearchHistory();
+                searchHistory.Phrase = phrase;
+                searchHistory.Id = iD;
 
                 //act 
+
+                var result = await searchHistoryBL.GetSearchHistoriesAsync();
+
             }
             catch (System.Exception ex)
             {
@@ -126,65 +135,6 @@ namespace GivHubTests
         }
 
         [TestMethod]
-        public void CreateAccount_ShouldReturnNull_WhenFirstNameIsNull()
-        {
-            //arrange
-
-            string firstName = null;
-            string lastName = "lastname";
-            string email = "123@mail.com";
-            int locationID = 1;
-            var options = new DbContextOptionsBuilder<GHDBContext>()
-            .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-            .Options;
-
-            //act
-            //assert
-
-        }
-        //test when everything is not null 
-
-
-
-        [TestMethod]
-        public void CreateAccount_ShouldReturnNull_WhenLastNameIsNull()
-        {
-            //arrange
-            string firstName = "firstname";
-            string lastName = null;
-            string email = "123@mail.com";
-            int locationID = 1;
-
-            var options = new DbContextOptionsBuilder<GHDBContext>()
-            .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-            .Options;
-            //act
-            //assert
-        }
-
-        [TestMethod]
-        public void CreateAccount_ShouldReturnNull_WhenEmailIsNull()
-        {
-            //arrange
-            string firstName = "firstName";
-            string lastName = "lastName";
-            string email = null;
-            int locationID = 1;
-
-            var options = new DbContextOptionsBuilder<GHDBContext>()
-            .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-            .Options;
-            //act
-            //assert 
-        }
-
-        /***********************************************************************************
-       
-        ************************************************************************************/
-
-
-
-        [TestMethod]
         public void GetCharityLocation_ShouldFail_WhenStateIsNull()
         {
             //arrange
@@ -377,6 +327,75 @@ namespace GivHubTests
 
 
         }
+
+
+
+        /***********************************************************************************
+       
+        ************************************************************************************/
+
+        //[TestMethod]
+        //public void CreateSubscription_ShouldReturnNull_WhenFirstNameIsNull()
+        //{
+        //    //arrange
+
+        //    string firstName = null;
+        //    string lastName = "lastname";
+        //    string email = "123@mail.com";
+        //    int locationID = 1;
+        //    var options = new DbContextOptionsBuilder<GHDBContext>()
+        //    .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
+        //    .Options;
+
+        //    //act
+        //    //assert
+
+        //}
+
+
+
+
+        //[TestMethod]
+        //public void CreateSubscription_ShouldReturnNull_WhenLastNameIsNull()
+        //{
+        //    //arrange
+        //    string firstName = "firstname";
+        //    string lastName = null;
+        //    string email = "123@mail.com";
+        //    int locationID = 1;
+
+        //    var options = new DbContextOptionsBuilder<GHDBContext>()
+        //    .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
+        //    .Options;
+        //    //act
+        //    //assert
+        //}
+
+        //[TestMethod]
+        //public void CreateSubscription_ShouldReturnNull_WhenEmailIsNull()
+        //{
+        //    //arrange
+        //    string firstName = "firstName";
+        //    string lastName = "lastName";
+        //    string email = null;
+        //    int locationID = 1;
+
+        //    var options = new DbContextOptionsBuilder<GHDBContext>()
+        //    .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
+        //    .Options;
+        //    //act
+        //    //assert 
+        //}
+
+
+
+        //[TestMethod]
+        //public void CreateSubscription_IsTrue_WhenFieldsAreNotNull() 
+        //{ }
+
+
+
+
 
 
 
