@@ -19,12 +19,13 @@ namespace GivHubModels
             {
                 if (value == null || value.Equals(""))
                 {
-                    throw new Exception("Phrase must not be null.");
+                    throw new Exception("Email must not be null.");
                 }
                 email = value;
             }
         }
 
-        public Charity Charity { get; set; }
+        public int CharityId
+        { get; set; }
     }
 }

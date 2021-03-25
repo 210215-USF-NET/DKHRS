@@ -69,6 +69,10 @@ namespace SHRKD_GivHub
             });
             services.AddScoped<ILocationRepo, LocationRepoDB>();
             services.AddScoped<ILocationBL, LocationBL>();
+            services.AddScoped<ICharityRepo, CharityRepoDB>();
+            services.AddScoped<ICharityBL, CharityBL>();
+            services.AddScoped<IDonationRepo, DonationRepoDB>();
+            services.AddScoped<IDonationBL, DonationBL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

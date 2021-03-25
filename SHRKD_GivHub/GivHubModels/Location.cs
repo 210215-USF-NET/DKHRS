@@ -52,5 +52,8 @@ namespace GivHubModels
             }
         }
 
+        public int CharityId
+        { get; set; }
+
     }
 }
