@@ -11,7 +11,6 @@ namespace GivHubModels
         private string state;
         private string city;
         private string zipcode;
-        private int charityid;
 
         public int Id { get; set; }
         public string State
@@ -53,7 +52,8 @@ namespace GivHubModels
             }
         }
 
-        public int Charityid { get; set; }
+        public int CharityId
+        { get; set; }
 
     }
 }

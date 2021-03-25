@@ -26,6 +26,21 @@ namespace GivHubDL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Donations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    CharityId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Donations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SearchHistories",
                 columns: table => new
                 {
@@ -40,24 +55,17 @@ namespace GivHubDL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Donations",
+                name: "Subscriptions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Email = table.Column<string>(type: "text", nullable: true),
-                    Amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    CharityId = table.Column<int>(type: "integer", nullable: true)
+                    CharityId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Donations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Donations_Charities_CharityId",
-                        column: x => x.CharityId,
-                        principalTable: "Charities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Subscriptions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,54 +77,24 @@ namespace GivHubDL.Migrations
                     State = table.Column<string>(type: "text", nullable: true),
                     City = table.Column<string>(type: "text", nullable: true),
                     Zipcode = table.Column<string>(type: "text", nullable: true),
-                    Charityid = table.Column<int>(type: "integer", nullable: false)
+                    CharityId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Locations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Locations_Charities_Charityid",
-                        column: x => x.Charityid,
+                        name: "FK_Locations_Charities_CharityId",
+                        column: x => x.CharityId,
                         principalTable: "Charities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Subscriptions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Email = table.Column<string>(type: "text", nullable: true),
-                    CharityId = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Subscriptions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Subscriptions_Charities_CharityId",
-                        column: x => x.CharityId,
-                        principalTable: "Charities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_Donations_CharityId",
-                table: "Donations",
-                column: "CharityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Locations_Charityid",
+                name: "IX_Locations_CharityId",
                 table: "Locations",
-                column: "Charityid",
+                column: "CharityId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Subscriptions_CharityId",
-                table: "Subscriptions",
-                column: "CharityId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

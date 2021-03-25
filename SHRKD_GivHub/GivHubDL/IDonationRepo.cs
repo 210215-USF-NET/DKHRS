@@ -13,7 +13,7 @@ namespace GivHubDL
         Task<Donation> DeleteDonationAsync(Donation donation2BDeleted);
         Task<Donation> GetDonationByIdAsync(int id);
         Task<List<Donation>> GetDonationsAsync();
-        Task<List<Donation>> GetDonationsByCharityAsync(Charity charity);
+        Task<List<Donation>> GetDonationsByCharityAsync(int x);
         Task<List<Donation>> GetDonationsByUserAsync(string email);
         Task<Donation> UpdateDonationAsync(Donation donation2BUpdated);
     }
