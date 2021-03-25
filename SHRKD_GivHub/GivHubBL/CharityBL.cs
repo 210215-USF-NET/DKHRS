@@ -39,6 +39,11 @@ namespace GivHubBL
             return await _repo.GetCharityByIdAsync(id);
         }
 
+        public async Task<Charity> GetCharityByEidAsync(string eid)
+        {
+            return await _repo.GetCharityByEidAsync(eid);
+        }
+
         public async Task<Charity> GetCharityByNameAsync(string name)
         {
             return await _repo.GetCharityByNameAsync(name);

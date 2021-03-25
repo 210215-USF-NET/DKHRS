@@ -69,11 +69,20 @@ namespace SHRKD_GivHub.Controllers
             return Ok(charities);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("id")]
         [Produces("application/json")]
         public async Task<IActionResult> GetCharityByIdAsync(int id)
         {
             var charity = await _charBL.GetCharityByIdAsync(id);
+            if (charity == null) return NotFound();
+            return Ok(charity);
+        }
+
+        [HttpGet("eid")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetCharityByEidAsync(string eid)
+        {
+            var charity = await _charBL.GetCharityByEidAsync(eid);
             if (charity == null) return NotFound();
             return Ok(charity);
         }

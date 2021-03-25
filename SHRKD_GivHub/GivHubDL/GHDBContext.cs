@@ -27,6 +27,7 @@ namespace GivHubDL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Location>().Property(x => x.Id).ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Charity>().Property(x => x.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Charity>()
