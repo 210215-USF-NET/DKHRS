@@ -10,7 +10,7 @@ namespace GivHubBL
 {
     public class DonationBL : IDonationBL
     {
-        private IDonationRepo _repo;
+        private readonly IDonationRepo _repo;
 
         public DonationBL(IDonationRepo repo)
         {
@@ -31,14 +31,15 @@ namespace GivHubBL
             return await _repo.GetDonationByIdAsync(id);
         }
 
+
         public async Task<List<Donation>> GetDonationsAsync()
         {
             return await _repo.GetDonationsAsync();
         }
 
-        public async Task<List<Donation>> GetDonationsByCharityAsync(Charity charity)
+        public async Task<List<Donation>> GetDonationsByCharityAsync(int x)
         {
-            return await _repo.GetDonationsByCharityAsync(charity);
+            return await _repo.GetDonationsByCharityAsync(x);
         }
 
         public async Task<List<Donation>> GetDonationsByUserAsync(string email)

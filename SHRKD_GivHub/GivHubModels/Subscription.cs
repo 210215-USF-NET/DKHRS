@@ -25,6 +25,7 @@ namespace GivHubModels
             }
         }
 
-        public Charity Charity { get; set; }
+        public int CharityId
+        { get; set; }
     }
 }

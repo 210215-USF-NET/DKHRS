@@ -13,6 +13,7 @@ namespace GivHubModels
         private string website;
         private string category;
         private string logourl;
+        private string eid;
 
         public int Id { get; set; }
         public string Name
@@ -20,9 +21,9 @@ namespace GivHubModels
             get { return name; }
             set
             {
-                if (value == null || value.Equals(""))
+                if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("Name must contain a value.");
+                    throw new ArgumentNullException("value");
                 }
                 name = value;
             }
@@ -34,9 +35,9 @@ namespace GivHubModels
             get { return missionstatement; }
             set
             {
-                if (value == null || value.Equals(""))
+                if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("Mission statement must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 missionstatement = value;
             }
@@ -47,9 +48,9 @@ namespace GivHubModels
             get { return website; }
             set
             {
-                if (value == null || value.Equals(""))
+                if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("Website must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 website = value;
             }
@@ -60,9 +61,9 @@ namespace GivHubModels
             get { return category; }
             set
             {
-                if (value == null || value.Equals(""))
+                if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("Category must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 category = value;
             }
@@ -73,12 +74,27 @@ namespace GivHubModels
             get { return logourl; }
             set
             {
-                if (value == null || value.Equals(""))
+                if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("URL must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 logourl = value;
             }
         }
+
+        public string EID
+        {
+            get { return eid; }
+            set
+            {
+                if (value == null || String.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("value");
+                }
+                eid = value;
+            }
+        }
+
+
     }
 }

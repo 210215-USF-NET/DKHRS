@@ -10,7 +10,7 @@ namespace GivHubBL
 {
     public class SubscriptionBL : ISubscriptionBL
     {
-        private ISubscriptionRepo _repo;
+        private readonly ISubscriptionRepo _repo;
         public SubscriptionBL(ISubscriptionRepo repo)
         {
             _repo = repo;
@@ -23,6 +23,11 @@ namespace GivHubBL
         public async Task<Subscription> DeleteSubscriptionAsync(Subscription sub2BDeleted)
         {
             return await _repo.DeleteSubscriptionAsync(sub2BDeleted);
+        }
+
+        public async Task<Subscription> GetSingleUserSubscription(string email, int charityval)
+        {
+            return await _repo.GetSingleUserSubscription(email, charityval);
         }
 
         public async Task<List<Subscription>> GetSubscriptionsAsync()

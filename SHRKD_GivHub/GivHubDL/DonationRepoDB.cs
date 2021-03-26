@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
+<<<<<<< HEAD
     public class DonationRepoDB : IDonationRepo
+=======
+    public class DonationRepoDB :IDonationRepo
+>>>>>>> main
     {
         private readonly GHDBContext _context;
         public DonationRepoDB(GHDBContext context)
@@ -39,10 +43,16 @@ namespace GivHubDL
                 .Select(donations => donations)
                 .ToListAsync();
         }
-        public async Task<List<Donation>> GetDonationsByCharityAsync(Charity charity)
+        public async Task<List<Donation>> GetDonationsByCharityAsync(int x)
         {
-            return await _context.Donations.Select(donation => donation).Where(donation => donation.Charity == charity).ToListAsync();
+            return await _context.Donations.Select(donation => donation).Where(donation => donation.CharityId == x).ToListAsync();
         }
+
+        public async Task<List<Donation>> GetDonationsByUserAsync(string email)
+        {
+            return await _context.Donations.Select(donations => donations).Where(donations => donations.Email == email).ToListAsync();
+        }
+<<<<<<< HEAD
 
         public Task<List<Donation>> GetDonationsByUserAsync(string email)
         {
@@ -53,6 +63,8 @@ namespace GivHubDL
         //{
         //    return await _context.Donations.Select(donations => donations).Where(donations => donations.Email == email).ToListAsync();
         //}
+=======
+>>>>>>> main
         public async Task<Donation> UpdateDonationAsync(Donation donation2BUpdated)
         {
             Donation olddonation = await _context.Donations.FindAsync(donation2BUpdated.Id);

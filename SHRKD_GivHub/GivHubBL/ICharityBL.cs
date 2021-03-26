@@ -11,6 +11,9 @@ namespace GivHubBL
         Task<List<Charity>> GetCharitiesAsync();
         Task<List<Charity>> GetCharitiesByCategoryAsync(string category);
         Task<Charity> GetCharityByIdAsync(int id);
+
+        Task<Charity> GetCharityByEidAsync(string eid);
+
         Task<Charity> GetCharityByNameAsync(string name);
         Task<Charity> GetCharityByWebsiteAsync(string website);
         Task<Charity> UpdateCharityAsync(Charity charity2BUpdated);

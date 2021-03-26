@@ -18,9 +18,9 @@ namespace GivHubModels
             get { return state; }
             set
             {
-                if (value == null || value.Equals(""))
+                if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("State cannot be null.");
+                    throw new ArgumentNullException("value");
                 }
                 state = value;
             }
@@ -31,9 +31,9 @@ namespace GivHubModels
             get { return city; }
             set
             {
-                if (value == null || value.Equals(""))
+                if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("City cannot be null.");
+                    throw new ArgumentNullException("value");
                 }
                 city = value;
             }
@@ -44,13 +44,16 @@ namespace GivHubModels
             get { return zipcode; }
             set
             {
-                if (value == null || value.Equals(""))
+                if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("Zipcode cannot be null.");
+                    throw new ArgumentNullException("value");
                 }
                 zipcode = value;
             }
         }
+
+        public int CharityId
+        { get; set; }
 
     }
 }

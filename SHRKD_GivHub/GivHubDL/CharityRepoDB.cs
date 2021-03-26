@@ -30,25 +30,49 @@ namespace GivHubDL
         public async Task<List<Charity>> GetCharitiesAsync()
         {
             return await _context.Charities
+                .Include("Location")
+                .AsNoTracking()
                 .Select(charities => charities)
                 .ToListAsync();
         }
         public async Task<List<Charity>> GetCharitiesByCategoryAsync(string category)
         {
-            return await _context.Charities.Select(O => O).Where(O => O.Category == category).ToListAsync();
+            return await _context.Charities.
+                Include("Location")
+                .AsNoTracking().
+                Select(O => O).
+                Where(O => O.Category == category).
+                ToListAsync();
 
         }
         public async Task<Charity> GetCharityByIdAsync(int id)
         {
-            return await _context.Charities.FirstOrDefaultAsync(charity => charity.Id == id);
+            return await _context.Charities.
+                Include("Location")
+                .AsNoTracking().
+                FirstOrDefaultAsync(charity => charity.Id == id);
+        }
+
+        public async Task<Charity> GetCharityByEidAsync(string eid)
+        {
+            return await _context.Charities.
+                Include("Location")
+                .AsNoTracking().
+                FirstOrDefaultAsync(charity => charity.EID == eid);
         }
         public async Task<Charity> GetCharityByNameAsync(string name)
         {
-            return await _context.Charities.FirstOrDefaultAsync(charity => charity.Name == name);
+            return await _context.Charities.
+                Include("Location")
+                .AsNoTracking().
+                FirstOrDefaultAsync(charity => charity.Name == name);
         }
         public async Task<Charity> GetCharityByWebsiteAsync(string website)
         {
-            return await _context.Charities.FirstOrDefaultAsync(charity => charity.Website == website);
+            return await _context.Charities.
+                Include("Location")
+                .AsNoTracking().
+                FirstOrDefaultAsync(charity => charity.Website == website);
         }
         public async Task<Charity> UpdateCharityAsync(Charity charity2BUpdated)
         {

@@ -9,7 +9,7 @@ namespace GivHubModels
     public class Donation
     {
         private string email;
-
+        private decimal amount;
         public int Id { get; set; }
 
         public string Email
@@ -19,14 +19,26 @@ namespace GivHubModels
             {
                 if (value == null || value.Equals(""))
                 {
-                    throw new Exception("Phrase must not be null.");
+                    throw new Exception("Email must not be null.");
                 }
                 email = value;
             }
         }
 
-        public decimal Amount { get; set; }
+        public decimal Amount
+        {
+            get { return amount; }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new Exception("amount must not be null.");
+                }
+                amount = value;
+            }
+        }
 
-        public Charity Charity { get; set; }
+        public int CharityId
+        { get; set; }
     }
 }

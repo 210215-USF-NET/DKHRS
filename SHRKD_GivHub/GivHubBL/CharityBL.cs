@@ -8,7 +8,7 @@ namespace GivHubBL
 {
     public class CharityBL : ICharityBL
     {
-        private ICharityRepo _repo;
+        private readonly ICharityRepo _repo;
         public CharityBL(ICharityRepo repo)
         {
             _repo = repo;
@@ -37,6 +37,11 @@ namespace GivHubBL
         public async Task<Charity> GetCharityByIdAsync(int id)
         {
             return await _repo.GetCharityByIdAsync(id);
+        }
+
+        public async Task<Charity> GetCharityByEidAsync(string eid)
+        {
+            return await _repo.GetCharityByEidAsync(eid);
         }
 
         public async Task<Charity> GetCharityByNameAsync(string name)

@@ -10,7 +10,7 @@ namespace GivHubBL
 {
     public class SearchHistoryBL : ISearchHistoryBL
     {
-        private ISearchHistoryRepo _repo;
+        private readonly ISearchHistoryRepo _repo;
         public SearchHistoryBL(ISearchHistoryRepo repo)
         {
             _repo = repo;
@@ -33,6 +33,11 @@ namespace GivHubBL
         public async Task<List<SearchHistory>> GetSearchHistoriesByUserAsync(string email)
         {
             return await _repo.GetSearchHistoriesByUserAsync(email);
+        }
+
+        public async Task<SearchHistory> GetUserSingleSearchHistoryAsync(string email, int id)
+        {
+            return await _repo.GetUserSingleSearchHistoryAsync(email, id);
         }
 
         public async Task<SearchHistory> UpdateSearchHistoryAsync(SearchHistory search2BUpdated)
