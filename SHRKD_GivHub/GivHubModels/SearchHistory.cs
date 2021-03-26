@@ -19,11 +19,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-<<<<<<< HEAD
-                    throw new Exception("Email must not be null.");
-=======
                     throw new ArgumentNullException("value");
->>>>>>> main
                 }
                 email = value;
             }
