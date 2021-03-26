@@ -35,7 +35,7 @@ namespace GivHubMoqTests
             var result = await donationBL.GetDonationsAsync();
 
             //assert
-            Assert.
+            //Assert.
         }
 
     }
