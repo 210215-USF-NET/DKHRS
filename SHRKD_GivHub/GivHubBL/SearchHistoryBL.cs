@@ -10,7 +10,7 @@ namespace GivHubBL
 {
     public class SearchHistoryBL : ISearchHistoryBL
     {
-        private ISearchHistoryRepo _repo;
+        private readonly ISearchHistoryRepo _repo;
         public SearchHistoryBL(ISearchHistoryRepo repo)
         {
             _repo = repo;
