@@ -22,8 +22,11 @@ namespace GivHubTests
      */
     {
         private DonationBL donationBL = null;
+        private CharityBL charityBL = null;
+
         public GivHubIntegrationTests()
         {
+            //settings 
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
             var config = builder.Build();
             var connectionString = config.GetConnectionString("GHDB");
@@ -31,10 +34,36 @@ namespace GivHubTests
               .UseNpgsql(connectionString)
               .Options;
             var ghDBContext = new GHDBContext(options);
+
+            //donations
             DonationRepoDB donationRepoDB = new DonationRepoDB(ghDBContext);
             donationBL = new DonationBL(donationRepoDB);
+            Donation donation = new Donation();
+
+            //charities
+            CharityRepoDB charityRepoDB = new CharityRepoDB(ghDBContext);
+            charityBL = new CharityBL(charityRepoDB);
+            Charity charity = new Charity();
+            
         }
-         
+
+        [TestMethod]
+        public async void GetDonationByIdAsync_ShouldReturnDonationID_WhenIDIsValid()
+        {
+            //arrange
+            int id = 2;
+
+            //act
+            var result = await donationBL.GetDonationByIdAsync(id);
+
+            //assert
+            Assert.IsNotNull(result);
+            
+            //maybe use a foreach? ^^^^^^^^^^^^^^
+
+        }
+
+
         [TestMethod]
         public async void GetDonationsByUserAsync_ShouldReturnNull_WhenEmailIsNull()
         {
@@ -51,49 +80,93 @@ namespace GivHubTests
 
 
 
-        // public async Task<Donation> AddDonationAsync(Donation newDonation)
+        [TestMethod]
+        public async void GetDonationsByUserAsync_ShouldReturnCorrectDonations_WhenEmailIsValid()
+        {
+            //arrange
+            string email = "email@email.com";
+
+            //act
+            var result = await donationBL.GetDonationsByUserAsync(email);
+
+            //assert
+            foreach (var donation in result)
+            {
+                Assert.AreEqual(email, donation.Email);
+
+            }
+
+        }
+
+
+        [TestMethod]
+        public async Task GetDonationsAsync_ShouldSucceed_WhenDonationAmountIsGreaterThanZeroAsync()
+        {
+                 //arrange
+                decimal amount = 100m;
+              
+                //act
+                var result = await donationBL.GetDonationsAsync();
+            
+                //assert
+                foreach (var donation in result)
+                {
+                      Assert.AreEqual(amount, donation.Amount);
+
+                }  ////////////////////
+         }
+
+        [TestMethod]
+        public async void GetDonationsByCharityAsync_ShouldReturnCharity_WhenCharityIsValid()
+        {
+            //arrange
+            int charityID = 2;
+
+            //act
+            var result = await donationBL.GetDonationsByCharityAsync(charityID);
+
+            //assert
+            Assert.AreEqual(result, charityID );
+        }
+
+        [TestMethod]
+        public async void DeleteCharityAsync_ShouldReturnCharityToBeDeleted_WhenCharity2BDeletedIsValid()
+        {
+            //arrange
+            Charity charity2BDeleted = new Charity();
+
+            //act 
+            var result = await charityBL.DeleteCharityAsync(charity2BDeleted);
+
+            //assert
+            //foreach (var charity in result) //////////////////////////////
+            //{
+            //    Assert.AreEqual(charity2BDeleted, charity._repo);
+            //}
+            
+
+        }
+
+
+        [TestMethod]
+        public async void GetCharitiesAsync_ShouldReturnCharities_WhenValid()
+        {
+            ///////////////
+        }
+
+
+        [TestMethod]
+        public async void GetCharitiesByCategoryAsync_ShouldReturnCharities_WhenCategoryIsValid()
+        {
+            string category = "category";
+        }
 
 
 
 
-
-
-
-
-
-
-        //[TestMethod]
-        //public async Task GetDonationsAsync_ShouldSucceed_WhenDonationIsGreaterThanZeroAsync()
-        //{
-        //    //arrange
-        //    decimal amount = 3m;
-        //    int donationID = 1;
-
-
-        //    var options = new DbContextOptionsBuilder<GHDBContext>()
-        //    .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-        //    .Options;
-
-        //    var ghDBContext = new GHDBContext(options);
-        //    DonationRepoDB donationRepoDB = new DonationRepoDB(ghDBContext);
-        //    DonationBL donationBL = new DonationBL(donationRepoDB);
-        //    Donation donation = new Donation();
-        //    donation.Amount = amount;
-        //    donation.Id = donationID;
-
-        //    //act
-
-        //    var result = await donationBL.GetDonationsAsync();
-
-        //    //assert
-        //    Assert.AreEqual(donation.Amount, amount);
-
-
-        //}
-
-        //[TestMethod]
-        //public async Task GetSearchHistoriesAsync_ShouldSucceed_WhenPhraseAndEmailIsNotNullAsync()
-        //{
+            //[TestMethod]
+            //public async Task GetSearchHistoriesAsync_ShouldSucceed_WhenPhraseAndEmailIsNotNullAsync()
+            //{
 
         //    //arrange
         //    int iD = 1;
