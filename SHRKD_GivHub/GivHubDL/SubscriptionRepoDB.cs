@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
-    public class SubscriptionRepoDB :ISubscriptionRepo
+    public class SubscriptionRepoDB : ISubscriptionRepo
     {
         private readonly GHDBContext _context;
         public SubscriptionRepoDB(GHDBContext context)
@@ -40,6 +40,8 @@ namespace GivHubDL
                 .Select(subs => subs)
                 .ToListAsync();
         }
+
+        
         public async Task<List<Subscription>> GetSubscriptionsByUserAsync(string email)
         {
             return await _context.Subscriptions.Select(subs => subs).Where(subs => subs.Email == email).ToListAsync();
