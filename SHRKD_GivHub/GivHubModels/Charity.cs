@@ -23,7 +23,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("Name must contain a value.");
+                    throw new ArgumentNullException("value");
                 }
                 name = value;
             }
@@ -37,7 +37,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("Mission statement must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 missionstatement = value;
             }
@@ -50,7 +50,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("Website must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 website = value;
             }
@@ -63,7 +63,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("Category must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 category = value;
             }
@@ -76,7 +76,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("URL must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 logourl = value;
             }
@@ -89,7 +89,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("eid must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 eid = value;
             }

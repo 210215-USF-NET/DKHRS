@@ -20,7 +20,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("State cannot be null.");
+                    throw new ArgumentNullException("value");
                 }
                 state = value;
             }
@@ -33,7 +33,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("City cannot be null.");
+                    throw new ArgumentNullException("value");
                 }
                 city = value;
             }
@@ -46,7 +46,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("Zipcode cannot be null.");
+                    throw new ArgumentNullException("value");
                 }
                 zipcode = value;
             }

@@ -19,7 +19,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("Email must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 email = value;
             }
@@ -32,7 +32,7 @@ namespace GivHubModels
             {
                 if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("Phrase must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 phrase = value;
             }
