@@ -25,6 +25,11 @@ namespace GivHubBL
             return await _repo.DeleteSubscriptionAsync(sub2BDeleted);
         }
 
+        public async Task<Subscription> GetSingleUserSubscription(string email, int charityval)
+        {
+            return await _repo.GetSingleUserSubscription(email, charityval);
+        }
+
         public async Task<List<Subscription>> GetSubscriptionsAsync()
         {
             return await _repo.GetSubscriptionsAsync();

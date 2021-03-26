@@ -21,7 +21,7 @@ namespace SHRKD_GivHub.Controllers
             _locBL = locBL;
         }
 
-        // POST api/<HeroController>
+        // POST api/<LocationController>
         [HttpPost]
         [Consumes("application/json")]
         public async Task<IActionResult> AddLocationAsync([FromBody] Location location)

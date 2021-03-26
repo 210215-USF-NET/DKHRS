@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GivHubDL
 {
-    public class SubscriptionRepoDB
+    public class SubscriptionRepoDB :ISubscriptionRepo
     {
         private readonly GHDBContext _context;
         public SubscriptionRepoDB(GHDBContext context)
@@ -28,6 +28,12 @@ namespace GivHubDL
             await _context.SaveChangesAsync();
             return sub2BDeleted;
         }
+
+        public async Task<Subscription> GetSingleUserSubscription(string email, int charityval)
+        {
+            return await _context.Subscriptions.FirstOrDefaultAsync(sub => sub.Email == email && sub.CharityId == charityval);
+        }
+
         public async Task<List<Subscription>> GetSubscriptionsAsync()
         {
             return await _context.Subscriptions
