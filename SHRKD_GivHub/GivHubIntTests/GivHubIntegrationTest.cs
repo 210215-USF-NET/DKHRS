@@ -135,34 +135,40 @@ namespace GivHubTests
             {
                 Assert.AreEqual(charityID, donation.CharityId);
             }
-            
+
+            //I ask for donationID 2 areequal is a stricter assertion . If I give u an id make sure u find that id
+           // foreach is for lists
         }
 
 
 
-        [TestMethod]
-        public async void DeleteCharityAsync_ShouldReturnCharityToBeDeleted_WhenCharity2BDeletedIsValid()
-        {
-            //arrange
-            Charity charity2BDeleted = new Charity();
-
-            //act 
-            var result = await charityBL.DeleteCharityAsync(charity2BDeleted);
-
-            //assert
-            Assert.IsNotNull(result);
-
-            //foreach (var charity in result) 
-            //{
-            //    Assert.AreEqual(charity2BDeleted, charity._repo);
-            //}
+        //[TestMethod]
+        //public async void DeleteCharityAsync_ShouldReturnCharityToBeDeleted_WhenCharity2BDeletedIsValid()
 
 
-        }
+        //{    SAVE FOR MOCK TESTING
 
 
-        [TestMethod]
-        public async void DeleteCharityAsync_ShouldReturnNull_WhenCharity2BDeletedIsNull()
+        //    //arrange
+        //    Charity charity2BDeleted = new Charity();
+
+        //    //act 
+        //    var result = await charityBL.DeleteCharityAsync(charity2BDeleted);
+
+        //    //assert
+        //    Assert.IsNotNull(result);
+
+        //    //foreach (var charity in result) 
+        //    //{
+        //    //    Assert.AreEqual(charity2BDeleted, charity._repo);
+        //    //}
+
+
+        //}
+
+        [TestMethod]        
+        [ExpectedException (typeof(ArgumentNullException))]
+        public async Task DeleteCharityAsync_ShouldThrowArgumentNullException_WhenCharity2BDeletedIsNull() 
         {
             //assert
             Charity charity2BDeleted = null;
@@ -171,16 +177,17 @@ namespace GivHubTests
             var result = await charityBL.DeleteCharityAsync(charity2BDeleted);
 
             //assert
-            Assert.IsNull(charity2BDeleted);
+            //Assert.IsNull(result);
+
         }
 
 
 
-        [TestMethod]
-        public async void GetCharitiesAsync_ShouldReturnCharities_WhenValid()
-        {
-            ///////////////
-        }
+        //[TestMethod]
+        //public async void GetCharitiesAsync_ShouldReturnCharities_WhenValid()
+        //{
+        //    ///////////////
+        //}
 
 
         [TestMethod]
@@ -193,35 +200,33 @@ namespace GivHubTests
             var result = await charityBL.GetCharitiesByCategoryAsync(category);
 
             //assert
-            Assert.IsNotNull(result);
-
-            //foreach (var charity in result)
-            //{
-            //    Assert.AreEqual(category, charity.Category);
-            //}
+            foreach (var charity in result)
+            {
+                Assert.AreEqual(category, charity.Category);
+            }
             //////////////////////
         }
 
-        [TestMethod]
-        public async void GetCharitiesAsync_ShouldFail_WhenStringNameIsNullAsync()
-        {
-            try
-            {
-                //arrange
-                int ID = 1;
-                string name = null;
+        //[TestMethod]
+        //public async void GetCharitiesAsync_ShouldFail_WhenStringNameIsNullAsync()
+        //{
+        //    try
+        //    {
+        //        //arrange
+        //        int ID = 1;
+        //        string name = null;
 
-                //act 
-                var result = await charityBL.GetCharitiesAsync();
-            }
-            catch (System.Exception ex)
-            {
-                //assert
-                Assert.IsNotNull("Name must contain a value.", ex.Message);
-            }
+        //        //act 
+        //        var result = await charityBL.GetCharitiesAsync();
+        //    }
+        //    catch (System.Exception ex)
+        //    {
+        //        //assert
+        //        Assert.IsNotNull("Name must contain a value.", ex.Message);
+        //    }
 
 
-        }
+        //}
 
         [TestMethod]
         public async void GetCharitiesByCategoryAsync_ShouldReturnNull_WhenCategoryIsNull()
@@ -237,33 +242,33 @@ namespace GivHubTests
             Assert.IsNull(result);
         }
 
-        [TestMethod]
-        public async void GetCharitiesAsync_ShouldSucceed_WhenFieldsAreNotNullAsync()
-        {
-            //arrange
-            Charity charity = new Charity();
-            int ID = 1;
-            string name = "name";
-            string missionStatement = "mission statement";
-            string website = "www.website.com";
-            string category = "category";
-            string logourl = "www.logoURL.com";
+        //[TestMethod]
+        //public async void GetCharitiesAsync_ShouldSucceed_WhenFieldsAreNotNullAsync()
+        //{
+        //    //arrange
+        //    Charity charity = new Charity();
+        //    int ID = 1;
+        //    string name = "name";
+        //    string missionStatement = "mission statement";
+        //    string website = "www.website.com";
+        //    string category = "category";
+        //    string logourl = "www.logoURL.com";
 
 
-            //act
-            var result = await charityBL.GetCharitiesAsync();
+        //    //act
+        //    var result = await charityBL.GetCharitiesAsync();
 
-            //assert
-            foreach (var charities in result)
-            {
-                Assert.AreEqual(ID, charity.Id);
-                Assert.AreEqual(name, charity.Name);
-                Assert.AreEqual(missionStatement, charity.Missionstatement);
-                Assert.AreEqual(website, charity.Website);
-                Assert.AreEqual(category, charity.Category);
-                Assert.AreEqual(logourl, charity.Logourl);
-            }
-        }
+        //    //assert
+        //    foreach (var charities in result)
+        //    {
+        //        Assert.AreEqual(ID, charity.Id);
+        //        Assert.AreEqual(name, charity.Name);
+        //        Assert.AreEqual(missionStatement, charity.Missionstatement);
+        //        Assert.AreEqual(website, charity.Website);
+        //        Assert.AreEqual(category, charity.Category);
+        //        Assert.AreEqual(logourl, charity.Logourl);
+        //    }
+        //}
 
 
         [TestMethod]
@@ -276,12 +281,7 @@ namespace GivHubTests
             var result = await charityBL.GetCharityByIdAsync(ID);
 
             //assert
-            Assert.IsNotNull(result);
-
-            //foreach (var charity in result)
-            //{
-            //    Assert.AreEqual(ID, charity.Id);
-            //}
+            Assert.AreEqual(ID, result.Id);
         }
 
 
@@ -295,11 +295,11 @@ namespace GivHubTests
             var result = await charityBL.GetCharityByEidAsync(eid);
 
             //assert
-            Assert.IsNotNull(result);
+            Assert.AreEqual(eid ,result.EID);
         }
 
         [TestMethod]
-        public async void GetCharityByEidAsync_ShouldReturnNull_WhenEIDIsNull()
+        public async Task GetCharityByEidAsync_ShouldReturnNull_WhenEIDIsNull()
         {
             //arrange 
             string eid = null;
@@ -322,7 +322,7 @@ namespace GivHubTests
             var result = await charityBL.GetCharityByNameAsync(name);
 
             //assert
-            Assert.IsNotNull(result);
+            Assert.AreEqual(name, result.Name);
         
         }
 
@@ -349,7 +349,7 @@ namespace GivHubTests
             var result = await charityBL.GetCharityByWebsiteAsync(website);
 
             //assert
-            Assert.IsNotNull(result);
+            Assert.AreEqual(website, result.Website);
         }
              
         [TestMethod]
@@ -370,12 +370,15 @@ namespace GivHubTests
         {
             //arrange
             Charity charity2BUpdated = new Charity();
+            charity2BUpdated.Id = 2;
+            string newName = new Guid().ToString();  //guid is a random string
+            charity2BUpdated.Name = newName;
 
             //act
             var result = await charityBL.UpdateCharityAsync(charity2BUpdated);
 
             //assert
-            Assert.AreEqual(result, charity2BUpdated.Id);
+            Assert.AreEqual(newName, result.Name);
 
         }
 
@@ -421,33 +424,119 @@ namespace GivHubTests
         }
 
         [TestMethod]
-        public async void GetLocationByCityStateAsync_ShouldReturnLocation_WhenCityAndStateAreBothValid() //
+        public async Task GetLocationByCityStateAsync_ShouldReturnLocation_WhenCityAndStateAreBothValid() 
         {
             //arrange
-            string city = "city";
-            string state = "state";
+            string city = "Austin";
+            string state = "TX";
 
             //act
             var result = await locationBL.GetLocationByCityStateAsync(city, state);
 
             ////assert
-            //foreach (var locations in result)
-            //{
-            //    Assert.AreEqual(city, locations.city);
-            //    Assert.AreEqual(state, locations.state);
-            //}
+         
+            Assert.AreEqual(city, result.City);
+            Assert.AreEqual(state, result.State);
+            
             
         }
 
         [TestMethod]
-        public async void GetLocationByCityStateAsync_ShouldReturnNull_WhenCityOrStateIsNull() //
+        public async Task GetLocationByCityStateAsync_ShouldReturnNull_WhenCityIsNull() 
         {
             //arrange
             string city = null;
-            string state = "state";
+            string state = "TX";
+
+            //act
+            var result = await locationBL.GetLocationByCityStateAsync(city, state);
+
+            //assert
+            Assert.IsNull(result);
       
 
         }
+
+        [TestMethod]
+        public async Task GetLocationByCityStateAsync_ShouldReturnNull_WhenStateIsNull() 
+        {
+            //arrange
+            string city = "Austin";
+            string state = null;
+
+            //act
+            var result = await locationBL.GetLocationByCityStateAsync(city, state);
+
+            //assert
+            Assert.IsNull(result);
+
+
+        }
+
+        [TestMethod]
+        public async Task GetLocationByIdAsync_ShouldReturnID_WhenIDisValid()
+        {
+            //arrange 
+            int id = 2;
+
+            //act 
+            var result = await locationBL.GetLocationByIdAsync(id);
+
+            //assert
+            Assert.AreEqual(id, result.Id);
+
+        }
+
+        [TestMethod]
+        public async Task UpdateLocationAsync_ShouldReturnUpdatedLocation_WhenLocationIsValid()
+        {
+            Location location2BUpdated = new Location();
+            //arrange
+            location2BUpdated.Id = 2;
+            string newCity = new Guid().ToString();  //guid is a random string
+            string newState = new Guid().ToString();  //guid is a random string
+            string newZipCode = new Guid().ToString();  //guid is a random string
+
+
+            location2BUpdated.City = newCity;
+            location2BUpdated.State = newState;
+            location2BUpdated.Zipcode = newZipCode;
+
+            //act
+            var result = await locationBL.UpdateLocationAsync(location2BUpdated);
+
+            //assert
+            Assert.AreEqual(newCity, result.City);
+            Assert.AreEqual(newState, result.State);
+            Assert.AreEqual(newZipCode, result.Zipcode);
+        }
+
+        public async Task UpdateLocationAsync_ShouldReturnNullWhenLocationIsNull()
+        {
+            Location location2BUpdated = null;
+            location2BUpdated.Id = 2;
+
+            string newCity = new Guid().ToString();  //guid is a random string
+            string newState = new Guid().ToString();  //guid is a random string
+            string newZipCode = new Guid().ToString();  //guid is a random string
+
+
+            location2BUpdated.City = newCity;
+            location2BUpdated.State = newState;
+            location2BUpdated.Zipcode = newZipCode;
+
+            //act
+            var result = await locationBL.UpdateLocationAsync(location2BUpdated);
+
+            //assert
+            Assert.IsNull(result.City);
+            Assert.IsNull(result.State);
+            Assert.IsNull(result.Zipcode);
+
+
+        }
+
+
     }
 
 
