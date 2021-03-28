@@ -54,6 +54,11 @@ namespace GivHubBL
             return await _repo.GetCharityByWebsiteAsync(website);
         }
 
+        public async Task<List<Charity>> GetPopularCharitiesAsync()
+        {
+            return await _repo.GetPopularCharitiesAsync();
+        }
+
         public async Task<Charity> UpdateCharityAsync(Charity charity2BUpdated)
         {
             return await _repo.UpdateCharityAsync(charity2BUpdated);

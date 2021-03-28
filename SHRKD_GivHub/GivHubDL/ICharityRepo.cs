@@ -17,6 +17,8 @@ namespace GivHubDL
         Task<Charity> GetCharityByEidAsync(string eid);
         Task<Charity> GetCharityByNameAsync(string name);
         Task<Charity> GetCharityByWebsiteAsync(string website);
+
+        Task<List<Charity>> GetPopularCharitiesAsync();
         Task<Charity> UpdateCharityAsync(Charity charity2BUpdated);
     }
 }

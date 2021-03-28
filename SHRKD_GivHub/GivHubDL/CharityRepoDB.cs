@@ -74,6 +74,29 @@ namespace GivHubDL
                 .AsNoTracking().
                 FirstOrDefaultAsync(charity => charity.Website == website);
         }
+
+        public async Task<List<Charity>> GetPopularCharitiesAsync()
+        {
+            var popchar =
+            from charity in _context.Charities join sub in _context.Subscriptions
+            on charity.Id equals sub.CharityId
+            join loc in _context.Locations
+            on charity.Location equals loc
+            where charity.Id == sub.CharityId
+            //group charity by sub.CharityId into popularcharity
+            select new
+            {
+                charity.Location,
+                loc,
+                charity
+            };
+            foreach (var pc in popchar)
+            {
+                pc.charity.Location = pc.loc;
+            }
+
+            return await popchar.Select(x => x.charity).ToListAsync();
+        }
         public async Task<Charity> UpdateCharityAsync(Charity charity2BUpdated)
         {
             Charity oldchar = await _context.Charities.FindAsync(charity2BUpdated.Id);

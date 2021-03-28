@@ -55,7 +55,7 @@ namespace SHRKD_GivHub.Controllers
 
         //GET api/<LocationController>/
         [HttpGet]
-        public async Task<IActionResult> GetLocationsAsync()
+        public async Task<IActionResult> GetCharitiesAsync()
         {
             return Ok(await _charBL.GetCharitiesAsync());
         }
@@ -104,6 +104,14 @@ namespace SHRKD_GivHub.Controllers
             if (charity == null) return NotFound();
             return Ok(charity);
         }
+
+        [HttpGet("x")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetPopularCharitiesAsync()
+        {
+            return Ok(await _charBL.GetPopularCharitiesAsync());
+        }
+
 
         //PUT api/<LocationController>/
         [HttpPut]
