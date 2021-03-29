@@ -82,7 +82,7 @@ namespace GivHubDL
             on charity.Id equals sub.CharityId
             join loc in _context.Locations
             on charity.Location equals loc
-            where charity.Id == sub.CharityId
+            where Int32.Parse(charity.EID) == sub.CharityId
             //group charity by sub.CharityId into popularcharity
             select new
             {
