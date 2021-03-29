@@ -22,9 +22,9 @@ GivHub will be an Angular Web Application that assists users in fullfilling thei
 - Account feature to track donation goals
 - Recommend users to like-charities based on their subscriptions
 - Documentation of user donations available in their account
-- Social feature connecting individuals with friends and those with like-minded interests
+- Present current events and latest articles on a charity's page
 ### - Stretch Goals
-1) Present current events and latest articles on a charity's page
+1) Social feature connecting individuals with friends and those with like-minded interests
 2) View useful graphs of charity data
 3) View financial  records and IRS standing
 ***
@@ -39,4 +39,7 @@ C#, Azure Pipeline, PostgreSql, Angular, ASP.NET REST API, Serilog, SonarCloud, 
 ## The OrgHunter CharityAPI
 "The OrgHunter Charity API provides developers access to over 2M charities in our database, our charity API can easily be integrated into your application or website. We provide our charity data to over 1000 websites and mobile applications, making us the largest charity data provider on the market today!"
 http://charityapi.orghunter.com/
+
+## New York Times Article API
+https://developer.nytimes.com/docs/articlesearch-product/1/overview
 ***
