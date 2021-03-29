@@ -28,6 +28,8 @@ namespace SHRKD_GivHub.Controllers
         {
             try
             {
+                var findCharity = await _charBL.GetCharityByNameAsync(charity.Name);
+                if (findCharity != null) return NotFound();
                 await _charBL.AddCharityAsync(charity);
                 return CreatedAtAction("AddCharity", charity);
             }
