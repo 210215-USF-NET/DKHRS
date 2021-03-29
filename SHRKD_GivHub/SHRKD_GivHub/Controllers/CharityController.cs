@@ -24,14 +24,18 @@ namespace SHRKD_GivHub.Controllers
         //POST
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> AddCharityAsync([FromBody] Charity charity)
+        public async Task<IActionResult> AddCharityAsync([FromBody] Charity[] charity)
         {
             try
             {
-                var findCharity = await _charBL.GetCharityByNameAsync(charity.Name);
-                if (findCharity != null) return NotFound();
-                await _charBL.AddCharityAsync(charity);
-                return CreatedAtAction("AddCharity", charity);
+                foreach (Charity ch in charity)
+                {
+                   var findCharity = await _charBL.GetCharityByNameAsync(ch.Name);
+                    if (findCharity != null) return NotFound();
+                    await _charBL.AddCharityAsync(ch);
+                    return CreatedAtAction("AddCharity", ch);
+                }
+                return StatusCode(400);
             }
             catch
             {
