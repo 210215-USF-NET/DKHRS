@@ -72,17 +72,17 @@ namespace SHRKD_GivHub.Controllers
         }
 
         //PUT api/<LocationController>/
-        [HttpGet("Charityid")]
+        [HttpGet("/result/{charityid}")]
         [Produces("application/json")]
-        public async Task<IActionResult> GetDonationByCharityAsync(int id)
+        public async Task<IActionResult> GetDonationByCharityAsync(int charityid)
         {
-            var donation = await _donBL.GetDonationsByCharityAsync(id);
+            var donation = await _donBL.GetDonationsByCharityAsync(charityid);
             if (donation == null) return NotFound();
             return Ok(donation);
         }
 
         //PUT api/<LocationController>/
-        [HttpGet("email")]
+        [HttpGet("result/{email}")]
         [Produces("application/json")]
         public async Task<IActionResult> GetDonationsByUserAsync(string email)
         {
