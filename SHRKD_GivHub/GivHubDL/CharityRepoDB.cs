@@ -79,17 +79,17 @@ namespace GivHubDL
         {
             var popchar =
             from charity in _context.Charities join sub in _context.Subscriptions
-            on charity.Id equals sub.CharityId
+            on charity.EID equals sub.CharityId.ToString()
             join loc in _context.Locations
             on charity.Location equals loc
-            where charity.Id == sub.CharityId
-            //group charity by sub.CharityId into popularcharity
+            where charity.EID == sub.CharityId.ToString()
             select new
             {
                 charity.Location,
                 loc,
                 charity
             };
+            popchar = popchar.Distinct();
             foreach (var pc in popchar)
             {
                 pc.charity.Location = pc.loc;
