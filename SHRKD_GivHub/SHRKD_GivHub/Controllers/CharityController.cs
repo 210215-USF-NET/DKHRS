@@ -111,7 +111,7 @@ namespace SHRKD_GivHub.Controllers
             return Ok(charity);
         }
 
-        [HttpGet("x")]
+        [HttpGet("popularcharity")]
         [Produces("application/json")]
         public async Task<IActionResult> GetPopularCharitiesAsync()
         {
