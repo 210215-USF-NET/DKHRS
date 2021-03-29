@@ -54,7 +54,7 @@ namespace SHRKD_GivHub.Controllers
         }
 
         //GET api/<LocationController>/
-        [HttpGet("city")]
+        [HttpGet("{city},{state}")]
         [Produces("application/json")]
         public async Task<IActionResult> GetLocationByCityStateAsync(string city, string state)
         {
