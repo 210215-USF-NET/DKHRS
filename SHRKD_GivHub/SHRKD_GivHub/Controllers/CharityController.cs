@@ -43,7 +43,7 @@ namespace SHRKD_GivHub.Controllers
                 }
                 return StatusCode(200);
             }
-            catch()
+            catch
             {
                 return StatusCode(400);
             }
