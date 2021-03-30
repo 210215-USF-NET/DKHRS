@@ -2,6 +2,7 @@
 using GivHubModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +22,23 @@ namespace SHRKD_GivHub.Controllers
             _charBL = charBL;
         }
 
-        //POST
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> AddCharityAsync([FromBody] Charity charity)
+        [AcceptVerbs("POST")]
+        public async Task<IActionResult> AddCharityAsync([FromBody] object thisJSON)
         {
             try
             {
-                await _charBL.AddCharityAsync(charity);
-                return CreatedAtAction("AddCharity", charity);
+                var charities = JsonConvert.DeserializeObject<Charity[]>(thisJSON.ToString());
+                foreach (Charity ch in charities)
+                {
+                    var findCharity = await _charBL.GetCharityByNameAsync(ch.Name);
+                    if (findCharity == null)
+                    {
+                        await _charBL.AddCharityAsync(ch);
+                    }
+                }
+                return StatusCode(200);
             }
             catch
             {
@@ -105,7 +114,7 @@ namespace SHRKD_GivHub.Controllers
             return Ok(charity);
         }
 
-        [HttpGet("x")]
+        [HttpGet("popularcharity")]
         [Produces("application/json")]
         public async Task<IActionResult> GetPopularCharitiesAsync()
         {
