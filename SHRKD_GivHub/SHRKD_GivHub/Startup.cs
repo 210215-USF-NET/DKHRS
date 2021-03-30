@@ -77,6 +77,8 @@ namespace SHRKD_GivHub
             services.AddScoped<ISubscriptionBL, SubscriptionBL>();
             services.AddScoped<ISearchHistoryRepo, SearchHistoryRepoDB>();
             services.AddScoped<ISearchHistoryBL, SearchHistoryBL>();
+            services.AddScoped<IFollowRepo, FollowRepoDB>();
+            services.AddScoped<IFollowBL, FollowBL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
