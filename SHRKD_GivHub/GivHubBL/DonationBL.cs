@@ -10,7 +10,7 @@ namespace GivHubBL
 {
     public class DonationBL : IDonationBL
     {
-        private IDonationRepo _repo;
+        private readonly IDonationRepo _repo;
 
         public DonationBL(IDonationRepo repo)
         {

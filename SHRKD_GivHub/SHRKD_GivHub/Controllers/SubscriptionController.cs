@@ -27,6 +27,8 @@ namespace SHRKD_GivHub.Controllers
         {
             try
             {
+                var findSub = await _subBL.GetSingleUserSubscription(subscription.Email, subscription.CharityId);
+                if (findSub != null) return NotFound();
                 await _subBL.AddSubscriptionAsync(subscription);
                 return CreatedAtAction("AddSubscription", subscription);
             }

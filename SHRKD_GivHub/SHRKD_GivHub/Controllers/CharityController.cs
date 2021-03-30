@@ -3,8 +3,10 @@ using GivHubModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,11 +34,13 @@ namespace SHRKD_GivHub.Controllers
                 var charities = JsonConvert.DeserializeObject<Charity[]>(thisJSON.ToString());
                 foreach (Charity ch in charities)
                 {
+
                     var findCharity = await _charBL.GetCharityByNameAsync(ch.Name);
                     if (findCharity == null)
                     {
                         await _charBL.AddCharityAsync(ch);
                     }
+
                 }
                 return StatusCode(200);
             }

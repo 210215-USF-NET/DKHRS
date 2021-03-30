@@ -17,9 +17,9 @@ namespace GivHubModels
             get { return email; }
             set
             {
-                if (value == null || value.Equals(""))
+                if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("Email must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 email = value;
             }
@@ -30,9 +30,9 @@ namespace GivHubModels
             get { return phrase; }
             set
             {
-                if (value == null || value.Equals(""))
+                if (value == null || String.IsNullOrEmpty(value))
                 {
-                    throw new Exception("Phrase must not be null.");
+                    throw new ArgumentNullException("value");
                 }
                 phrase = value;
             }

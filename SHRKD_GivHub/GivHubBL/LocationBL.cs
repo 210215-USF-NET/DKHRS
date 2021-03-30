@@ -10,7 +10,7 @@ namespace GivHubBL
 {
     public class LocationBL : ILocationBL
     {
-        private ILocationRepo _repo;
+        private readonly ILocationRepo _repo;
         public LocationBL(ILocationRepo repo)
         {
             _repo = repo;

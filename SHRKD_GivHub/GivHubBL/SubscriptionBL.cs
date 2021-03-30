@@ -10,7 +10,7 @@ namespace GivHubBL
 {
     public class SubscriptionBL : ISubscriptionBL
     {
-        private ISubscriptionRepo _repo;
+        private readonly ISubscriptionRepo _repo;
         public SubscriptionBL(ISubscriptionRepo repo)
         {
             _repo = repo;
