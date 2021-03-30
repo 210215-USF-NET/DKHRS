@@ -422,5 +422,23 @@ namespace GivHubMoqTests
             Assert.IsInstanceOfType(result, typeof(CreatedAtActionResult));
 
         }
+
+
+        [TestMethod]
+        public async Task AddSearchHistoryAsync_ShouldReturnStatusCode400_WhenSearchHistoryIsNull()
+        {
+            //arrange 
+            var searchHistoryBLMock = new Mock<ISearchHistoryBL>();
+            SearchHistory searchHistory = null;
+            searchHistoryBLMock.Setup(i => i.AddSearchHistoryAsync(searchHistory)).Throws(new Exception());
+            var searchHistoryController = new SearchHistoryController(searchHistoryBLMock.Object);
+
+            //act
+            var result = await searchHistoryController.AddSearchHistoryAsync(searchHistory);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(400, ((StatusCodeResult)result).StatusCode);
+        }
     }
 }
