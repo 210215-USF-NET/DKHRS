@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GivHubDL
@@ -69,6 +71,8 @@ namespace GivHubDL
         }
         public async Task<Charity> GetCharityByWebsiteAsync(string website)
         {
+            website = Regex.Replace(website, "%2F", "/");
+            website = Regex.Replace(website,"%3A", ":");
             return await _context.Charities.
                 Include("Location")
                 .AsNoTracking().
