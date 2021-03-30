@@ -2,8 +2,11 @@
 using GivHubModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,12 +27,21 @@ namespace SHRKD_GivHub.Controllers
         //POST
         [HttpPost]
         [Consumes("application/json")]
-        public async Task<IActionResult> AddCharityAsync([FromBody] Charity charity)
+        [AcceptVerbs("POST")]
+        public async Task<IActionResult> AddCharityAsync([FromBody] object thisJSON)
         {
             try
             {
-                await _charBL.AddCharityAsync(charity);
-                return CreatedAtAction("AddCharity", charity);
+                var charities = JsonConvert.DeserializeObject<Charity[]>(thisJSON.ToString());
+                foreach (Charity ch in charities)
+                {
+                    Debug.WriteLine(ch.Name);
+                    var findCharity = await _charBL.GetCharityByNameAsync(ch.Name);
+                    if (findCharity == null) {
+                        await _charBL.AddCharityAsync(ch);
+                    } 
+                }
+                return StatusCode(200);
             }
             catch
             {
@@ -60,7 +72,7 @@ namespace SHRKD_GivHub.Controllers
             return Ok(await _charBL.GetCharitiesAsync());
         }
 
-        [HttpGet("category")]
+        [HttpGet("categories/{category}")]
         [Produces("application/json")]
         public async Task<IActionResult> GetCharitiesByCategoryAsync(string category)
         {
@@ -69,7 +81,7 @@ namespace SHRKD_GivHub.Controllers
             return Ok(charities);
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         [Produces("application/json")]
         public async Task<IActionResult> GetCharityByIdAsync(int id)
         {
@@ -78,7 +90,7 @@ namespace SHRKD_GivHub.Controllers
             return Ok(charity);
         }
 
-        [HttpGet("eid")]
+        [HttpGet("eid/{eid}")]
         [Produces("application/json")]
         public async Task<IActionResult> GetCharityByEidAsync(string eid)
         {
@@ -87,7 +99,7 @@ namespace SHRKD_GivHub.Controllers
             return Ok(charity);
         }
 
-        [HttpGet("name")]
+        [HttpGet("name/{name}")]
         [Produces("application/json")]
         public async Task<IActionResult> GetCharityByNameAsync(string name)
         {
@@ -96,7 +108,7 @@ namespace SHRKD_GivHub.Controllers
             return Ok(charity);
         }
 
-        [HttpGet("website")]
+        [HttpGet("websites/{website}")]
         [Produces("application/json")]
         public async Task<IActionResult> GetCharityByWebsiteAsync(string website)
         {
@@ -105,7 +117,7 @@ namespace SHRKD_GivHub.Controllers
             return Ok(charity);
         }
 
-        [HttpGet("x")]
+        [HttpGet("popularcharity")]
         [Produces("application/json")]
         public async Task<IActionResult> GetPopularCharitiesAsync()
         {

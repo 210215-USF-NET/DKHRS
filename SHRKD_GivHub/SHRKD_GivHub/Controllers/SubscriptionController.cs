@@ -39,7 +39,7 @@ namespace SHRKD_GivHub.Controllers
         }
 
         // DELETE api/<SubscriptionController>/
-        [HttpDelete("id")]
+        [HttpDelete("{email}, {charityval}")]
         public async Task<IActionResult> DeleteSubscriptionAsync(string email, int charityval)
         {
             try
@@ -61,7 +61,7 @@ namespace SHRKD_GivHub.Controllers
             return Ok(await _subBL.GetSubscriptionsAsync());
         }
 
-        [HttpGet("email")]
+        [HttpGet("{email}")]
         [Produces("application/json")]
         public async Task<IActionResult> GetSubscriptionsByUserAsync(string email)
         {
