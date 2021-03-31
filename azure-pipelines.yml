@@ -30,13 +30,12 @@ steps:
   inputs:
     command: 'build'
     projects: '**/SHRKD_GivHub/*.sln'
-    arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
 
-# - task: DotNetCoreCLI@2
-#   inputs:
-#     command: 'test'
-#     projects: '**SHRKD_GivHub/GivHubTests/*.csproj'
-#     arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '**SHRKD_GivHub/GivHubTests/*.csproj'
+    arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
