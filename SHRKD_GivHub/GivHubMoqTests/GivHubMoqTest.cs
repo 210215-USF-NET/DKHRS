@@ -106,7 +106,7 @@ namespace GivHubMoqTests
 
 
         [TestMethod]
-        public async Task AddCharityAsync_ShouldReturnCreatedAtActionResult_WhenCharityIsValid()
+        public async Task AddCharityAsync_ShouldReturnStatusCode200_WhenCharityIsValid()
         {
             //arrange
             var charityBLMock = new Mock<ICharityBL>();
@@ -118,8 +118,36 @@ namespace GivHubMoqTests
             var result = await charityController.AddCharityAsync(charity);
 
             //assert
-            Assert.IsInstanceOfType(result, typeof(CreatedAtActionResult));
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(200, ((StatusCodeResult)result).StatusCode);
         }
+
+        /*
+         
+           public async Task<IActionResult> AddCharityAsync([FromBody] object thisJSON)
+        {
+            try
+            {
+                var charities = JsonConvert.DeserializeObject<Charity[]>(thisJSON.ToString());
+                foreach (Charity ch in charities)
+                {
+
+                    var findCharity = await _charBL.GetCharityByNameAsync(ch.Name);
+                    if (findCharity == null)
+                    {
+                        await _charBL.AddCharityAsync(ch);
+                    }
+
+                }
+                return StatusCode(200);
+            }
+            catch
+            {
+                return StatusCode(400);
+            }
+        }
+         
+         */
 
 
 
@@ -401,6 +429,81 @@ namespace GivHubMoqTests
             Assert.AreEqual(500, ((StatusCodeResult)result).StatusCode);
 
         }
+
+
+        /**********************************
+                Follow Controller
+         **********************************/
+        [TestMethod]
+        public async Task GetUserFollowsAsync_ShouldReturnOKFollowing_WhenEmailIsValid() 
+        {
+            //arrange
+            var followBLMock = new Mock<IFollowBL>();
+            string email = "email";
+            List<Follow> follows = new List<Follow>();
+            followBLMock.Setup(i => i.GetUserFollowsAsync(email)).ReturnsAsync(follows);
+            var followController = new FollowController(followBLMock.Object);
+
+            //act
+            var result = await followController.GetUserFollowsAsync(email);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+        [TestMethod]
+        public async Task GetUserFollowsAsync_ShouldReturnNotFound_WhenEmailIsNull()///////////////
+        {
+            //arrange
+            var followBLMock = new Mock<IFollowBL>();
+            string email = null;
+            List<Follow> follows = new List<Follow>();
+            followBLMock.Setup(i => i.GetUserFollowsAsync(email)).Throws(new Exception());
+            var followController = new FollowController(followBLMock.Object);
+
+            //act
+            var result = followController.GetUserFollowsAsync(email);
+
+
+                //assert
+            Assert.AreEqual(result, typeof(NotFoundResult));
+        /*        
+         *        [HttpGet("{email}/following")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetUserFollowsAsync(string email)
+        {
+            var following = await _folBL.GetUserFollowsAsync(email);
+            if (following == null) return NotFound();
+            return Ok(following);
+        }*/
+        }
+       
+
+
+        [TestMethod]
+        public async Task GetFollowingUserSubscriptionsAsync_ShouldReturnOKResult_WhenEmailIsValid()
+        {
+            //arrange
+            var followBLMock = new Mock<IFollowBL>();
+            string email = "email";
+            List<Follow> follows = new List<Follow>();
+            //followBLMock.Setup(i => i.GetFollowingUserSubscriptions(email)).ReturnsAsync(follows);
+            var followController = new FollowController(followBLMock.Object);
+
+            //act
+            var result = followController.GetFollowingUserSubscriptionsAsync(email);
+
+            //assert
+            Assert.AreEqual(result, typeof(OkResult));
+        }
+
+        /*
+            public async Task<IActionResult> GetFollowingUserSubscriptionsAsync(string email)
+        {
+            return Ok(await _folBL.GetFollowingUserSubscriptions(email));
+        }
+         */
+
+
 
         /************************
              Search History Controller
