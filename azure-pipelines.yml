@@ -30,6 +30,7 @@ steps:
   inputs:
     command: 'build'
     projects: '**/SHRKD_GivHub/*.sln'
+    arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
 
 # - task: DotNetCoreCLI@2
 #   inputs:
