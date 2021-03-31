@@ -82,7 +82,9 @@ namespace GivHubDL
         public async Task<List<Charity>> GetPopularCharitiesAsync()
         {
             var popchar =
-            from charity in _context.Charities join sub in _context.Subscriptions
+
+            from charity in _context.Charities
+            join sub in _context.Subscriptions
             on charity.EID equals sub.CharityId.ToString()
             join loc in _context.Locations
             on charity.Location equals loc

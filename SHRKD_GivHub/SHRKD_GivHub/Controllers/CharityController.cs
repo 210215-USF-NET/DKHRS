@@ -24,7 +24,6 @@ namespace SHRKD_GivHub.Controllers
             _charBL = charBL;
         }
 
-        //POST
         [HttpPost]
         [Consumes("application/json")]
         [AcceptVerbs("POST")]
@@ -35,11 +34,13 @@ namespace SHRKD_GivHub.Controllers
                 var charities = JsonConvert.DeserializeObject<Charity[]>(thisJSON.ToString());
                 foreach (Charity ch in charities)
                 {
-                    Debug.WriteLine(ch.Name);
+
                     var findCharity = await _charBL.GetCharityByNameAsync(ch.Name);
-                    if (findCharity == null) {
+                    if (findCharity == null)
+                    {
                         await _charBL.AddCharityAsync(ch);
-                    } 
+                    }
+
                 }
                 return StatusCode(200);
             }
