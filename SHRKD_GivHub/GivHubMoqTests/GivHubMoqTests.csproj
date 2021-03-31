@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GivHubBL\GivHubBL.csproj" />
+    <ProjectReference Include="..\GivHubDL\GivHubDL.csproj" />
     <ProjectReference Include="..\SHRKD_GivHub\SHRKD_GivHub.csproj" />
   </ItemGroup>
 
