@@ -120,9 +120,8 @@ namespace GivHubMoqTests
             //assert
             Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
             Assert.AreEqual(200, ((StatusCodeResult)result).StatusCode);
-        }
 
-        /*
+ /*
          
            public async Task<IActionResult> AddCharityAsync([FromBody] object thisJSON)
         {
@@ -148,6 +147,10 @@ namespace GivHubMoqTests
         }
          
          */
+
+        }
+
+       
 
 
 
@@ -391,6 +394,57 @@ namespace GivHubMoqTests
         /************************
          Location Controller
        ************************/
+        [TestMethod]
+        public async Task AddLocationAsync_Should_ReturnCreatedAtActionResult_WhenLocation_IsValid()
+        {
+            //arrange
+            var locationBLMock = new Mock<ILocationBL>();
+            Location location = new Location();
+            locationBLMock.Setup(i => i.AddLocationAsync(location)).ReturnsAsync(location);
+            var locationController = new LocationController(locationBLMock.Object);
+
+            //act
+            var result = await locationController.AddLocationAsync(location);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(CreatedAtActionResult));
+            /*
+         
+         public async Task<IActionResult> AddLocationAsync([FromBody] Location location)
+        {
+            try
+            {
+                await _locBL.AddLocationAsync(location);
+                return CreatedAtAction("AddLocation", location);
+            }
+            catch
+            {
+                return StatusCode(400);
+            }
+        }
+         
+         */}
+
+
+        [TestMethod]
+        public async Task AddLocationAsync_ShouldReturnStatusCode400_WhenLocation_IsInvalid()
+        {
+            //arrange
+            var locationBLMock = new Mock<ILocationBL>();
+            Location location = null;
+            locationBLMock.Setup(i => i.AddLocationAsync(location)).ReturnsAsync(location);
+            var locationController = new LocationController(locationBLMock.Object);
+
+            //act
+            var result = await locationController.AddLocationAsync(location);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(400, ((StatusCodeResult)result).StatusCode);
+        }
+       
+
+
 
         [TestMethod]
         public async Task DeleteLocationAsync_ShouldReturnNoContent_WhenLocationIDIsValid()
@@ -410,6 +464,10 @@ namespace GivHubMoqTests
 
 
         }
+
+
+
+
 
         [TestMethod]
         public async Task DeleteLocationAsync_ShouldReturnStatusCode500_WhenLocationIDIsInvalid()
@@ -434,6 +492,32 @@ namespace GivHubMoqTests
         /**********************************
                 Follow Controller
          **********************************/
+
+        /*
+         
+          // POST api/<FollowController>
+        [HttpPost]
+        [Consumes("application/json")]
+        public async Task<IActionResult> AddFollowAsync([FromBody] Follow fol)
+        {
+            if (!(fol.UserEmail.Equals(fol.FollowingEmail)))
+            {
+                try
+                {
+                    await _folBL.AddFollowAsync(fol);
+                    return CreatedAtAction("AddFollow", fol);
+                }
+                catch
+                {
+                    return StatusCode(400);
+                }
+            }
+            return StatusCode(400);
+        }
+         
+         */
+
+
         [TestMethod]
         public async Task GetUserFollowsAsync_ShouldReturnOKFollowing_WhenEmailIsValid() 
         {
@@ -461,7 +545,7 @@ namespace GivHubMoqTests
             var followController = new FollowController(followBLMock.Object);
 
             //act
-            var result = followController.GetUserFollowsAsync(email);
+            var result = await followController.GetUserFollowsAsync(email);
 
 
                 //assert
@@ -480,7 +564,7 @@ namespace GivHubMoqTests
 
 
         [TestMethod]
-        public async Task GetFollowingUserSubscriptionsAsync_ShouldReturnOKResult_WhenEmailIsValid()
+        public async Task GetFollowingUserSubscriptionsAsync_ShouldReturnOKObjectResult_WhenEmailIsValid()  //////////
         {
             //arrange
             var followBLMock = new Mock<IFollowBL>();
@@ -490,18 +574,108 @@ namespace GivHubMoqTests
             var followController = new FollowController(followBLMock.Object);
 
             //act
-            var result = followController.GetFollowingUserSubscriptionsAsync(email);
+            var result = await followController.GetFollowingUserSubscriptionsAsync(email);
 
             //assert
-            Assert.AreEqual(result, typeof(OkResult));
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+
+
+        [TestMethod]
+        public async Task GetFollowingUserSubscriptionsAsync_ShouldReturnNull_WhenEmailIsInvalid() //////////////////
+        {
+            //arrange
+            var followBLMock = new Mock<IFollowBL>();
+            string email = null;
+            Follow follow = new Follow();
+            followBLMock.Setup(i => i.GetFollowingUserSubscriptions(email)).Throws(new Exception());
+            var followController =  new FollowController(followBLMock.Object);
+
+            //act
+            var result = await followController.GetFollowingUserSubscriptionsAsync(email);
+
+            //assert
+           
+            
         }
 
         /*
-            public async Task<IActionResult> GetFollowingUserSubscriptionsAsync(string email)
+
+       public async Task<IActionResult> GetFollowingUserSubscriptionsAsync(string email)
         {
             return Ok(await _folBL.GetFollowingUserSubscriptions(email));
         }
+    }
+
          */
+
+
+
+        [TestMethod]
+        public async Task DeleteFollowAsync_ShouldReturnNoContent_WhenUserEmailAndFollowEmail_AreBothValid()
+        {
+            //arrange
+            var followBLMock = new Mock<IFollowBL>();
+            string userEmail = "userEmail";
+            string followEmail = "followEmail";
+            Follow follow = new Follow();
+            followBLMock.Setup(i => i.DeleteFollowAsync(follow)).ReturnsAsync(follow);
+            var followController = new FollowController(followBLMock.Object);
+
+            //act
+            var result = await followController.DeleteFollowAsync(userEmail, followEmail);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NoContentResult));
+
+
+        }
+
+        [TestMethod]
+        public async Task DeleteFollowAsync_ShouldReturnStatusCode500_WhenUserEmail_IsInvalid()
+        {
+            //arrange
+            var followBLMock = new Mock<IFollowBL>();
+            string userEmail = null;
+            string followEmail = "followEmail";
+            Follow follow = new Follow();
+            followBLMock.Setup(i => i.DeleteFollowAsync(follow)).Throws(new Exception());
+            var followController = new FollowController(followBLMock.Object);
+
+            //act
+            var result = await followController.DeleteFollowAsync(userEmail, followEmail);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(500, ((StatusCodeResult)result).StatusCode);
+        }
+
+
+        [TestMethod]
+        public async Task DeleteFollowAsync_ShouldReturnStatusCode500_WhenFollowEmail_IsInvalid()
+        {
+            //arrange
+            var followBLMock = new Mock<IFollowBL>();
+            string userEmail = "userEmail";
+            string followEmail = null;
+            Follow follow = new Follow();
+            followBLMock.Setup(i => i.DeleteFollowAsync(follow)).Throws(new Exception());
+            var followController = new FollowController(followBLMock.Object);
+
+            //act
+            var result = await followController.DeleteFollowAsync(userEmail, followEmail);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(500, ((StatusCodeResult)result).StatusCode);
+        }
+
+
+
+
+
+
+
 
 
 

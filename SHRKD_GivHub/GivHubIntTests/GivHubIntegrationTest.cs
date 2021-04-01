@@ -149,13 +149,6 @@ namespace GivHubTests
 
 
 
-        //[TestMethod]
-        //public async void GetCharitiesAsync_ShouldReturnCharities_WhenValid()
-        //{
-        //    ///////////////
-        //}
-
-
         [TestMethod]
         public async Task GetCharitiesByCategoryAsync_ShouldReturnCharities_WhenCategoryIsValid()
         {
@@ -195,7 +188,7 @@ namespace GivHubTests
         public async Task GetCharityByIdAsync_ShouldReturnCharity_WhenIDIsValid()
         {
             //assert
-            int ID = 2;
+            int ID = 33;
 
             //act
             var result = await charityBL.GetCharityByIdAsync(ID);
@@ -209,7 +202,7 @@ namespace GivHubTests
         public async Task GetCharityByEidAsync_ShouldReturnCharity_WhenEIDIsValid()
         {
             //assert
-            string eid = "string";
+            string eid = "330473813";
 
             //act
             var result = await charityBL.GetCharityByEidAsync(eid);
@@ -236,7 +229,7 @@ namespace GivHubTests
         public async Task GetCharityByNameAsync_ShouldReturnCharity_WhenNameIsValid()
         {
             //arrange
-            string name = "Charity";
+            string name = "CANCER CLIK";
 
             //act
             var result = await charityBL.GetCharityByNameAsync(name);
@@ -263,7 +256,7 @@ namespace GivHubTests
         public async Task GetCharityByWebsiteAsync_ShouldReturnCharity_WhenWebsiteIsValid()
         {
             //arrange
-            string website = "string";
+            string website = "http://www.orghunter.com/organization/954167790";
 
             //act
             var result = await charityBL.GetCharityByWebsiteAsync(website);
@@ -273,6 +266,7 @@ namespace GivHubTests
         }
              
         [TestMethod]
+        [ExpectedException (typeof(ArgumentNullException)) ]
         public async Task GetCharityByWebsiteAsync_ShouldReturnNull_WhenWebsiteIsNull()
         {
             //arrange
@@ -282,7 +276,7 @@ namespace GivHubTests
             var result = await charityBL.GetCharityByWebsiteAsync(website);
 
             //assert
-            Assert.IsNull(result);
+           // Assert.IsNull(result);
         }
 
         [TestMethod]
@@ -290,12 +284,12 @@ namespace GivHubTests
         {
             //arrange
             Charity charity2BUpdated = new Charity();
-            charity2BUpdated.Id = 2;
-            charity2BUpdated.EID = "string";
-            charity2BUpdated.Category = "string";
-            charity2BUpdated.Logourl = "string";
-            charity2BUpdated.Missionstatement = "string";
-            charity2BUpdated.Website = "string";
+            charity2BUpdated.Id = 7;
+            charity2BUpdated.EID = "472293681";
+            charity2BUpdated.Category = "Diseases, Disorders, Medical Disciplines";
+            charity2BUpdated.Logourl = "none";
+            charity2BUpdated.Missionstatement = "none";
+            charity2BUpdated.Website = "http://www.orghunter.com/organization/472293681";
 
             string newName = new Guid().ToString();  //guid is a random string
             charity2BUpdated.Name = newName;
@@ -344,7 +338,7 @@ namespace GivHubTests
         {
             //arrange
             string city = "Austin";
-            string state = "TX";
+            string state = "Texas";
 
             //act
             var result = await locationBL.GetLocationByCityStateAsync(city, state);
@@ -393,7 +387,7 @@ namespace GivHubTests
         public async Task GetLocationByIdAsync_ShouldReturnID_WhenIDisValid()
         {
             //arrange 
-            int id = 2;
+            int id = 6;
 
             //act 
             var result = await locationBL.GetLocationByIdAsync(id);
@@ -408,8 +402,8 @@ namespace GivHubTests
         {
             Location location2BUpdated = new Location();
             //arrange
-            location2BUpdated.Id = 2;
-            location2BUpdated.CharityId = 2;
+            location2BUpdated.Id = 6;
+            location2BUpdated.CharityId = 6;
             string newCity = new Guid().ToString();  //guid is a random string
             string newState = new Guid().ToString();  //guid is a random string
             string newZipCode = new Guid().ToString();  //guid is a random string
@@ -429,7 +423,7 @@ namespace GivHubTests
 
             //cleanup
             location2BUpdated.City = "Austin";
-            location2BUpdated.State = "TX";
+            location2BUpdated.State = "Texas";
             await locationBL.UpdateLocationAsync(location2BUpdated);
         }
 
@@ -447,6 +441,28 @@ namespace GivHubTests
             //assert expected exception
 
         }
+
+
+        //TEST NULL PARAM FOR DELETE
+        /*
+         
+          // DELETE api/<FollowController>/
+        [HttpDelete("{useremail},{followemail}")]
+        public async Task<IActionResult> DeleteFollowAsync(string useremail, string followemail)
+        {
+            try
+            {
+                var follow = await _folBL.GetSingleUserFollowAsync(useremail, followemail);
+                await _folBL.DeleteFollowAsync(follow);
+                return NoContent();
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+         
+         */
 
 
     }
