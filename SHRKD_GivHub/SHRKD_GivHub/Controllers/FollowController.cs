@@ -29,8 +29,14 @@ namespace SHRKD_GivHub.Controllers
             {
                 try
                 {
-                    await _folBL.AddFollowAsync(fol);
-                    return CreatedAtAction("AddFollow", fol);
+                    var following = await _folBL.GetUserFollowsAsync(fol.UserEmail);
+                    var foundFollow = following.Find(x => x.FollowingEmail.Equals(fol.FollowingEmail));
+                    if (foundFollow == null)
+                    {
+                        await _folBL.AddFollowAsync(fol);
+                        return CreatedAtAction("AddFollow", fol);
+                    }
+                    
                 }
                 catch
                 {
