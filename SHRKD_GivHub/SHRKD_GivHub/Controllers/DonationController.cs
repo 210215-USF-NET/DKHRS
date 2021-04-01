@@ -13,10 +13,12 @@ namespace SHRKD_GivHub.Controllers
     public class DonationController : ControllerBase
     {
         private readonly IDonationBL _donBL;
+        private readonly ICharityBL _charBL;
 
-        public DonationController(IDonationBL donBL)
+        public DonationController(IDonationBL donBL, ICharityBL charBL)
         {
             _donBL = donBL;
+            _charBL = charBL;
         }
         //ADD api/<LocationController>/
         [HttpPost]
@@ -27,8 +29,12 @@ namespace SHRKD_GivHub.Controllers
             {
                 try
                 {
-                    await _donBL.AddDonationAsync(donation);
-                    return CreatedAtAction("AddDonation", donation);
+                    var charity = await _charBL.GetCharityByEidAsync(donation.CharityId.ToString());
+                    if (charity != null)
+                    {
+                        await _donBL.AddDonationAsync(donation);
+                        return CreatedAtAction("AddDonation", donation);
+                    }
                 }
                 catch
                 {
