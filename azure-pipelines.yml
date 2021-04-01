@@ -36,7 +36,7 @@ steps:
     TargetFolder: '$(System.DefaultWorkingDirectory)/SHRKD_GivHub/GivHubIntTests'
     OverWrite: true
 - task: DownloadSecureFile@1
-  name: mySecureFile
+  name: mySecureFile2
   inputs:
     secureFile: 'appsettings.json'
 - task: CopyFiles@2
