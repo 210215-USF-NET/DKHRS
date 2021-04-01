@@ -38,11 +38,11 @@ Presentation: https://docs.google.com/presentation/d/19hezvOBl687k-fop5LoFJ0Kfc1
 
 
 ## Requirements
-- [ ] P2 Requirements
-- [ ] Must be as complex if not more complex than P1
-- [ ] At least 6 tables
-- [ ] DB that is not SQL Server (you might wanna try sqlite) postgresql is okay
-- [ ] Pipeline should be set up
+### P2 Requirements
+- [x] Must be as complex if not more complex than P1
+- [x] At least 6 tables
+- [x] DB that is not SQL Server (you might wanna try sqlite) postgresql is okay
+- [x] Pipeline should be set up
 - [ ] Angular Frontend
 - [ ] ASP.NET REST API Backend
 - [ ] At least 50% code coverage in sonar cloud
