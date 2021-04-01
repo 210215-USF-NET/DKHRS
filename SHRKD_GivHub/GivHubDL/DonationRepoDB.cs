@@ -56,5 +56,27 @@ namespace GivHubDL
             _context.ChangeTracker.Clear();
             return donation2BUpdated;
         }
+
+        public async Task<List<Donation>> GetTopDonationsAsync()
+        {
+            var result =
+            from donation in _context.Donations
+            group donation by new { donation.Email} into newgroup
+            select new
+            {
+                Email = newgroup.Key.Email,
+                Amount = newgroup.Sum(x => x.Amount)
+            };
+            List<Donation> newList = new List<Donation>();
+            foreach (var d in result)
+            {
+                Donation newDonation = new Donation();
+                newDonation.Email = d.Email;
+                newDonation.Amount = d.Amount;
+                newList.Add(newDonation);
+            }
+                    
+            return newList;
+        }
     }
 }
