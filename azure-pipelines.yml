@@ -56,13 +56,13 @@ steps:
     command: 'test'
     projects: '**SHRKD_GivHub/GivHubIntTests/*.csproj'
     arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
-    
-    
+  continueOnError: true
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
     projects: '**SHRKD_GivHub/GivHubMoqTests/*.csproj'
     arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
+  continueOnError: true
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
