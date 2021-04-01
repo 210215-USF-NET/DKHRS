@@ -57,6 +57,7 @@ steps:
     projects: '**SHRKD_GivHub/GivHubIntTests/*.csproj'
     arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
     
+    
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
