@@ -25,7 +25,27 @@ steps:
     projectName: 'GivHub-By-SHRKD'
     extraProperties: |
       sonar.exclusions=**/lib/**
-
+- task: DownloadSecureFile@1
+  name: mySecureFile
+  inputs:
+    secureFile: 'appsettings.json'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Agent.TempDirectory)'
+    Contents: 'appsettings.json'
+    TargetFolder: '$(System.DefaultWorkingDirectory)/SHRKD_GivHub/GivHubIntTests'
+    OverWrite: true
+- task: DownloadSecureFile@1
+  name: mySecureFile2
+  inputs:
+    secureFile: 'appsettings.json'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Agent.TempDirectory)'
+    Contents: 'appsettings.json'
+    TargetFolder: '$(System.DefaultWorkingDirectory)/SHRKD_GivHub/GivHubMoqTests'
+    OverWrite: true
+    
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
