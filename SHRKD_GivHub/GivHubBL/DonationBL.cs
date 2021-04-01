@@ -51,5 +51,10 @@ namespace GivHubBL
         {
             return await _repo.UpdateDonationAsync(donation2BUpdated);
         }
+
+        public async Task<List<Donation>> GetTopDonationsAsync()
+        {
+            return await _repo.GetTopDonationsAsync();
+        }
     }
 }

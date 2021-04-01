@@ -72,6 +72,14 @@ namespace SHRKD_GivHub.Controllers
         }
 
         //PUT api/<LocationController>/
+        [HttpGet("topdonations")]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetTopDonationsAsync()
+        {
+            return Ok(await _donBL.GetTopDonationsAsync());
+        }
+
+        //PUT api/<LocationController>/
         [HttpGet("/result/{charityid}")]
         [Produces("application/json")]
         public async Task<IActionResult> GetDonationByCharityAsync(int charityid)

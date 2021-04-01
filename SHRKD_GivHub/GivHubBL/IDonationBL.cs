@@ -13,5 +13,7 @@ namespace GivHubBL
         Task<List<Donation>> GetDonationsByCharityAsync(int x);
         Task<List<Donation>> GetDonationsByUserAsync(string email);
         Task<Donation> UpdateDonationAsync(Donation donation2BUpdated);
+
+        Task<List<Donation>> GetTopDonationsAsync();
     }
 }
