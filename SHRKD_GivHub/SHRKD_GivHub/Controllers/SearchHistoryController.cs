@@ -38,12 +38,12 @@ namespace SHRKD_GivHub.Controllers
         }
 
         // DELETE api/<SearchHistoryController>/
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSearchHistoryAsync(string email, int id)
+        [HttpDelete("{email},{phrase}")]
+        public async Task<IActionResult> DeleteSearchHistoryAsync(string email, string phrase)
         {
             try
             {
-                var sh = await _shBL.GetUserSingleSearchHistoryAsync(email, id);
+                var sh = await _shBL.GetUserSingleSearchHistoryAsync(email, phrase);
                 await _shBL.DeleteSearchHistoryAsync(sh);
                 return NoContent();
             }

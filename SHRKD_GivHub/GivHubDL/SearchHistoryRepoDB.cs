@@ -39,9 +39,9 @@ namespace GivHubDL
             return await _context.SearchHistories.Select(sh => sh).Where(sh => sh.Email == email).ToListAsync();
         }
 
-        public async Task<SearchHistory> GetUserSingleSearchHistoryAsync(string email, int id)
+        public async Task<SearchHistory> GetUserSingleSearchHistoryAsync(string email, string phrase)
         {
-            return await _context.SearchHistories.FirstOrDefaultAsync(sh => sh.Email == email && sh.Id == id);
+            return await _context.SearchHistories.FirstOrDefaultAsync(sh => sh.Email == email && sh.Phrase == phrase);
         }
         public async Task<SearchHistory> UpdateSearchHistoryAsync(SearchHistory search2BUpdated)
         {
