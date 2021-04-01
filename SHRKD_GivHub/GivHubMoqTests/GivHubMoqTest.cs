@@ -308,9 +308,10 @@ namespace GivHubMoqTests
         {
             //arrange
             var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
             List<Donation> donations = new List<Donation>();
             donationBLMock.Setup(i => i.GetDonationsAsync()).ReturnsAsync(donations);
-            var donationController = new DonationController(donationBLMock.Object);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
 
             //act
             var result = await donationController.GetDonationsAsync();
