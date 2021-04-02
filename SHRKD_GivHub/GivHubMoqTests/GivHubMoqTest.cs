@@ -63,7 +63,7 @@ namespace GivHubMoqTests
         }
 
         [TestMethod]
-        public async Task DeleteCharityAsync_ShouldReturnNoContent_WhenCharityIDIsValid() ///
+        public async Task DeleteCharityAsync_ShouldReturnNoContent_WhenCharityIDIsValid() 
         {
             //arrange
             int id = 2;
@@ -884,6 +884,134 @@ namespace GivHubMoqTests
             Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
             Assert.AreEqual(400, ((StatusCodeResult)result).StatusCode);
 
+        }
+
+        [TestMethod]
+        public async Task DeleteSubscriptionAsync_ShouldReturnNoContent_WhenEmailAndCharityVal()
+        {
+            //arrange
+            var subscriptionBLMock = new Mock<ISubscriptionBL>();
+            string email = "email";
+            int charityVal = 7;
+            Subscription subscription = new Subscription();
+            subscriptionBLMock.Setup(i => i.GetSingleUserSubscription(email, charityVal)).ReturnsAsync(subscription);
+            subscriptionBLMock.Setup(i => i.AddSubscriptionAsync(subscription)).ReturnsAsync(subscription);
+            SubscriptionController subscriptionController = new SubscriptionController(subscriptionBLMock.Object);
+
+            //act
+            var result = await subscriptionController.DeleteSubscriptionAsync(email, charityVal);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NoContentResult));
+
+        }
+
+
+        [TestMethod]
+        public async Task DeleteSubscriptionAsync_ShouldReturnStatusCode500_WhenSubscriptionIsInvalid()
+        {
+            //arrange
+            var subscriptionBLMock = new Mock<ISubscriptionBL>();
+            string email = "email";
+            int charityVal = 7;
+            Subscription subscription = null;
+            subscriptionBLMock.Setup(i => i.GetSingleUserSubscription(email, charityVal)).Throws(new Exception());
+            subscriptionBLMock.Setup(i => i.AddSubscriptionAsync(subscription)).ReturnsAsync(subscription);
+            SubscriptionController subscriptionController = new SubscriptionController(subscriptionBLMock.Object);
+
+            //act
+            var result = await subscriptionController.DeleteSubscriptionAsync(email,charityVal);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(500, ((StatusCodeResult)result).StatusCode);
+
+        }
+
+        [TestMethod]
+        public async Task GetSubscriptionsAsync_ShouldReturnOKResult()
+        {
+            //arrange
+            var subscriptionBLMock = new Mock<ISubscriptionBL>();
+            List<Subscription> subscriptions = new List<Subscription>();
+            subscriptionBLMock.Setup(i => i.GetSubscriptionsAsync()).ReturnsAsync(subscriptions);
+            SubscriptionController subscriptionController = new SubscriptionController(subscriptionBLMock.Object);
+
+            //act
+            var result = await subscriptionController.GetSubscriptionsAsync();
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+
+
+        [TestMethod]
+        public async Task GetSubscriptionsByUserAsync_ShouldReturnOKResult_WhenEmailIsValid()
+        {
+            //arrange
+            var subscriptionBLMock = new Mock<ISubscriptionBL>();
+            string email = "email";
+            List<Subscription> subscriptions = new List<Subscription>();
+            subscriptionBLMock.Setup(i => i.GetSubscriptionsByUserAsync(email)).ReturnsAsync(subscriptions);
+            SubscriptionController subscriptionController = new SubscriptionController(subscriptionBLMock.Object);
+
+            //act
+            var result = await subscriptionController.GetSubscriptionsByUserAsync(email);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+
+
+        [TestMethod]
+        public async Task GetSubscriptionsByUserAsync_ShouldReturnNotFound_WhenSubscriptionsListIsInvalid()
+        {
+            //arrange
+            var subscriptionBLMock = new Mock<ISubscriptionBL>();
+            string email = "string";
+            List<Subscription> subscriptions = null;
+            subscriptionBLMock.Setup(i => i.GetSubscriptionsByUserAsync(email)).ReturnsAsync(subscriptions);
+            SubscriptionController subscriptionController = new SubscriptionController(subscriptionBLMock.Object);
+
+            //act
+            var result = await subscriptionController.GetSubscriptionsByUserAsync(email);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
+
+
+        [TestMethod]
+        public async Task UpdateSubscriptionAsync_ShouldReturnNoContent_WhenSubscriptionIsValid()
+        {
+            //arrange
+            var subscriptionBLMock = new Mock<ISubscriptionBL>();
+            Subscription subscription = new Subscription();
+            subscriptionBLMock.Setup(i => i.UpdateSubscriptionAsync(subscription)).ReturnsAsync(subscription);
+            SubscriptionController subscriptionController = new SubscriptionController(subscriptionBLMock.Object);
+
+            //act
+            var result = await subscriptionController.UpdateSubscriptionAsync(subscription);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NoContentResult));
+        }
+
+        [TestMethod]
+        public async Task UpdateSubscriptionAsync_ShouldReturnStatusCode500_WhenSubscriptionIsInvalid()
+        {
+            //arrange
+            var subscriptionBLMock = new Mock<ISubscriptionBL>();
+            Subscription subscription = null;
+            subscriptionBLMock.Setup(i => i.UpdateSubscriptionAsync(subscription)).Throws(new Exception());
+            SubscriptionController subscriptionController = new SubscriptionController(subscriptionBLMock.Object);
+
+            //act
+            var result = await subscriptionController.UpdateSubscriptionAsync(subscription);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(500, ((StatusCodeResult)result).StatusCode);
         }
     }
 }
