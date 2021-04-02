@@ -492,6 +492,130 @@ namespace GivHubMoqTests
 
         }
 
+        [TestMethod]
+        public async Task GetLocationByCityStateAsync_ShouldReturnOKObjectResult_WhenCityAndStateAreValid() 
+        {
+            //arrange
+            var locationBLMock = new Mock<ILocationBL>();
+            string city = "city";
+            string state = "state";
+            Location location = new Location();
+            locationBLMock.Setup(i => i.GetLocationByCityStateAsync(city, state)).ReturnsAsync(location);
+            LocationController locationController = new LocationController(locationBLMock.Object);
+
+            //act
+            var result = await locationController.GetLocationByCityStateAsync(city, state);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+
+        }
+
+
+        [TestMethod]
+        public async Task GetLocationByCityStateAsync_ShouldReturnNotFound_WhenLocationIsInvalid()
+        {
+            //arrange
+            var locationBLMock = new Mock<ILocationBL>();
+            string city = "city";
+            string state = "state";
+            Location location = null;
+            locationBLMock.Setup(i => i.GetLocationByCityStateAsync(city, state)).ReturnsAsync(location);
+            LocationController locationController = new LocationController(locationBLMock.Object);
+
+            //act
+            var result = await locationController.GetLocationByCityStateAsync(city, state);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+
+        }
+
+
+        [TestMethod]
+        public async Task GetLocationByIDAsync_ShouldReturnOKObjectResult_WhenIDIsValid()
+        {
+            //arrange
+            var locationBLMock = new Mock<ILocationBL>();
+            int id = 7;
+            Location location = new Location();
+            locationBLMock.Setup(i => i.GetLocationByIdAsync(id)).ReturnsAsync(location);
+            LocationController locationController = new LocationController(locationBLMock.Object);
+
+            //act
+            var result = await locationController.GetLocationByIdAsync(id);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+
+        [TestMethod]
+        public async Task GetLocationByIDAsync_ShouldReturnNotFound_WhenLocationIsInvalid()
+        {
+            //arrange
+            var locationBLMock = new Mock<ILocationBL>();
+            int id = 7;
+            Location location = null;
+            locationBLMock.Setup(i => i.GetLocationByIdAsync(id)).ReturnsAsync(location);
+            LocationController locationController = new LocationController(locationBLMock.Object);
+
+            //act
+            var result = await locationController.GetLocationByIdAsync(id);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
+
+        [TestMethod]
+        public async Task GetLocationsAsync_ShouldReturnOKResult()
+        {
+            //arrange
+            var locationBLMock = new Mock<ILocationBL>();
+            List<Location> locations = new List<Location>();
+            locationBLMock.Setup(i => i.GetLocationsAsync()).ReturnsAsync(locations);
+            LocationController locationController = new LocationController(locationBLMock.Object);
+
+            //act
+            var result = await locationController.GetLocationsAsync();
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+
+        [TestMethod]
+        public async Task UpdateLocationAsync_ShouldReturnNoContent_WhenLocation_IsValid()
+        {
+            //arrange
+            var locationBLM = new Mock<ILocationBL>();
+            Location location = new Location();
+            locationBLM.Setup(i => i.UpdateLocationAsync(location)).ReturnsAsync(location);
+            var locationController = new LocationController(locationBLM.Object);
+
+            //act
+            var result = await locationController.UpdateLocationAsync(location);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NoContentResult));
+        }
+
+
+        [TestMethod]
+        public async Task UpdateLocationAsync_ShouldReturnStatusCode500_WhenLocation_IsInvalid()
+        {
+            //arrange
+            var locationBLM = new Mock<ILocationBL>();
+            Location location = null;
+            locationBLM.Setup(i => i.UpdateLocationAsync(location)).Throws(new Exception());
+            var locationController = new LocationController(locationBLM.Object);
+
+            //act
+            var result = await locationController.UpdateLocationAsync(location);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(500, ((StatusCodeResult)result).StatusCode);
+        }
+
 
         /**********************************
                 Follow Controller
