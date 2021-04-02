@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GivHubTests
 {
@@ -25,6 +26,7 @@ namespace GivHubTests
         private CharityBL charityBL = null;
         private LocationBL locationBL = null;
         private SearchHistoryBL searchHistoryBL = null;
+        private FollowBL followBL = null;
 
         public GivHubIntegrationTests()
         {
@@ -56,13 +58,18 @@ namespace GivHubTests
             SearchHistoryRepoDB searchHistoryRepoDB = new SearchHistoryRepoDB(ghDBContext);
             searchHistoryBL = new SearchHistoryBL(searchHistoryRepoDB);
             SearchHistory searchHistory = new SearchHistory();
+
+            //follow
+            FollowRepoDB followRepoDB = new FollowRepoDB(ghDBContext);
+            followBL = new FollowBL(followRepoDB);
+            Follow follow = new Follow();
         }
 
         [TestMethod]
         public async Task GetDonationByIdAsync_ShouldReturnCorrectDonation_WhenIDIsValid()
         {
             //arrange
-            int id = 3;
+            int id = 7;
 
             //act
             var result = await donationBL.GetDonationByIdAsync(id);
@@ -443,363 +450,8 @@ namespace GivHubTests
         }
 
 
-        //TEST NULL PARAM FOR DELETE
-        /*
-         
-          // DELETE api/<FollowController>/
-        [HttpDelete("{useremail},{followemail}")]
-        public async Task<IActionResult> DeleteFollowAsync(string useremail, string followemail)
-        {
-            try
-            {
-                var follow = await _folBL.GetSingleUserFollowAsync(useremail, followemail);
-                await _folBL.DeleteFollowAsync(follow);
-                return NoContent();
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
-        }
-         
-         */
-
 
     }
 
 
 }
-
-
-
-
-
-
-
-
-
-//[TestMethod]
-//public async Task GetSearchHistoriesAsync_ShouldSucceed_WhenPhraseAndEmailIsNotNullAsync()
-//{
-
-//    //arrange
-//    int iD = 1;
-//    string phrase = "Phrase";
-//    string email = "123@email.com";
-//    var options = new DbContextOptionsBuilder<GHDBContext>()
-//    .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-//    .Options;
-
-//    var ghDBContext = new GHDBContext(options);
-//    SearchHistoryRepoDB searchHistoryRepoDB = new SearchHistoryRepoDB(ghDBContext);
-//    SearchHistoryBL searchHistoryBL = new SearchHistoryBL(searchHistoryRepoDB);
-//    SearchHistory searchHistory = new SearchHistory();
-//    searchHistory.Phrase = phrase;
-//    searchHistory.Id = iD;
-//    searchHistory.Email = email;
-
-//    //act
-//    var result = await searchHistoryBL.GetSearchHistoriesAsync();
-//    //assert
-//    Assert.IsNotNull(searchHistory.Phrase, searchHistory.Email);
-//}
-
-//[TestMethod]
-////[ExpectedException(typeof(Exception))]
-////
-//public async Task GetSearchHistoriesAsync_ShouldFail_WhenPhraseIsNullAsync()
-//{
-//    try
-//    {
-//        //arrange
-//        int iD = 1;
-//        string phrase = null;
-//        string email = "123@email.com";
-
-//        var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
-//        var config = builder.Build();
-//        var connectionString = config.GetConnectionString("GHDB");
-
-//        var options = new DbContextOptionsBuilder<GHDBContext>()
-//          .UseNpgsql(connectionString)
-//           .Options;
-
-//        var ghDBContext = new GHDBContext(options);
-//        SearchHistoryRepoDB searchHistoryRepoDB = new SearchHistoryRepoDB(ghDBContext);
-//        SearchHistoryBL searchHistoryBL = new SearchHistoryBL(searchHistoryRepoDB);
-//        SearchHistory searchHistory = new SearchHistory();
-//        searchHistory.Phrase = phrase;
-//        searchHistory.Id = iD;
-//        searchHistory.Email = email;
-
-//        //act 
-
-//        var result = await searchHistoryBL.GetSearchHistoriesAsync();
-
-//    }
-//    catch (System.Exception ex)
-//    {
-//        //assert
-//        Assert.AreEqual("Phrase must not be null.", ex.Message);
-//    }
-
-
-//}
-
-//[TestMethod]
-//public async Task GetSearchHistoriesAsync_ShouldFail_WhenEmailIsNullAsync()
-//{
-//    try
-//    {
-//        //arrange
-//        int iD = 1;
-//        string phrase = "Phrase";
-//        string email = null;
-//        var options = new DbContextOptionsBuilder<GHDBContext>()
-//          .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-//           .Options;
-
-//        var ghDBContext = new GHDBContext(options);
-//        SearchHistoryRepoDB searchHistoryRepoDB = new SearchHistoryRepoDB(ghDBContext);
-//        SearchHistoryBL searchHistoryBL = new SearchHistoryBL(searchHistoryRepoDB);
-//        SearchHistory searchHistory = new SearchHistory();
-//        searchHistory.Phrase = phrase;
-//        searchHistory.Id = iD;
-//        searchHistory.Email = email;
-
-//        //act 
-
-//        var result = await searchHistoryBL.GetSearchHistoriesAsync();
-
-//    }
-//    catch (System.Exception ex)
-//    {
-//        //assert
-//        Assert.AreEqual("Email must not be null.", ex.Message);
-//    }
-
-
-//}
-
-
-//[TestMethod]
-//public async Task GetLocationsAsync_ShouldFail_WhenStateIsNullAsync()
-//{
-//    try
-//    {
-//        //arrange
-//        string state = null;
-//        string zipCode = "1234567";
-//        string city = "city";
-
-
-//        var options = new DbContextOptionsBuilder<GHDBContext>()
-//        .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-//        .Options;
-//        var ghDBContext = new GHDBContext(options);
-//        LocationRepoDB locationRepoDB = new LocationRepoDB(ghDBContext);
-//        LocationBL locationBL = new LocationBL(locationRepoDB);
-//        Location location = new Location();
-
-//        location.City = city;
-//        location.State = state;
-//        location.Zipcode = zipCode;
-
-//        //act 
-//        var result = await locationBL.GetLocationsAsync();
-//    }
-//    catch (System.Exception ex)
-//    {
-//        //assert
-//        Assert.AreEqual("State cannot be null.", ex.Message);
-//    }
-
-//}
-
-
-//[TestMethod]
-//public async Task GetLocationsAsync_ShouldReturnLocation_WhenCityStateZipIsNotNullAsync()
-//{
-//    //arrange
-//    string state = "state";
-//    string zipCode = "1234567";
-//    string city = "city";
-
-
-//    var options = new DbContextOptionsBuilder<GHDBContext>()
-//    .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-//    .Options;
-//    var ghDBContext = new GHDBContext(options);
-//    LocationRepoDB locationRepoDB = new LocationRepoDB(ghDBContext);
-//    LocationBL locationBL = new LocationBL(locationRepoDB);
-//    Location location = new Location();
-
-//    location.City = city;
-//    location.State = state;
-//    location.Zipcode = zipCode;
-
-//    //act
-//    var result = await locationBL.GetLocationsAsync();
-
-
-//    //assert
-//    Assert.IsNotNull(location.City);
-//    Assert.IsNotNull(location.State);
-//    Assert.IsNotNull(location.Zipcode);
-//}
-
-
-
-
-//[TestMethod]
-//public async Task GetSubscriptionsAsync_ShouldReturnNull_WhenEmailIsNullAsync()
-//{
-
-//    try
-//    {
-//        //arrange
-//        int ID = 1;
-//        string email = null;
-
-
-//        var options = new DbContextOptionsBuilder<GHDBContext>()
-//        .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-//        .Options;
-//        var ghDBContext = new GHDBContext(options);
-//        SubscriptionRepoDB subscriptionRepoDB = new SubscriptionRepoDB(ghDBContext);
-//        SubscriptionBL subscriptionBL = new SubscriptionBL(subscriptionRepoDB);
-//        Subscription subscription = new Subscription();
-
-//        subscription.Id = ID;
-//        subscription.Email = email;
-
-//        //act
-//        var result = await subscriptionBL.GetSubscriptionsAsync();
-//    }
-//    catch (System.Exception ex)
-//    {
-//        //assert
-//        Assert.IsNotNull("Email must not be null.", ex.Message);
-//    }
-
-//}
-
-
-//[TestMethod]
-//public async Task GetSubscriptionsAsync_ShouldReturnNull_WhenIDIsNullAsync()
-//{
-
-
-//    //arrange
-//    int? ID = null;
-//    string email = "email@email.com";
-
-
-//    var options = new DbContextOptionsBuilder<GHDBContext>()
-//    .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-//    .Options;
-//    var ghDBContext = new GHDBContext(options);
-//    SubscriptionRepoDB subscriptionRepoDB = new SubscriptionRepoDB(ghDBContext);
-//    SubscriptionBL subscriptionBL = new SubscriptionBL(subscriptionRepoDB);
-//    Subscription subscription = new Subscription();
-
-//    subscription.Id = (int)ID;
-//    subscription.Email = email;
-
-//    //act
-//    var result = await subscriptionBL.GetSubscriptionsAsync();
-
-
-
-//    //assert
-//    Assert.AreEqual(ID, subscription.Id);
-
-
-//}
-
-
-//[TestMethod]
-//public async Task GetSubscriptionsAsync_ShouldSucceed_WhenIDandEmailIsNotNull()
-//{
-
-
-//    //arrange
-//    int ID = 1;
-//    string email = "email@email.com";
-
-
-//    var options = new DbContextOptionsBuilder<GHDBContext>()
-//    .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-//    .Options;
-//    var ghDBContext = new GHDBContext(options);
-//    SubscriptionRepoDB subscriptionRepoDB = new SubscriptionRepoDB(ghDBContext);
-//    SubscriptionBL subscriptionBL = new SubscriptionBL(subscriptionRepoDB);
-//    Subscription subscription = new Subscription();
-
-//    subscription.Id = ID;
-//    subscription.Email = email;
-
-//    //act
-//    var result = await subscriptionBL.GetSubscriptionsAsync();
-
-
-
-//    //assert
-//    Assert.AreEqual(ID, subscription.Id);
-//    Assert.AreEqual(email, subscription.Email);
-
-
-//}
-
-
-
-
-
-///***********************************************************************************
-       
-//        ************************************************************************************/
-
-////[TestMethod]
-////public void CreateSubscription_ShouldReturnNull_WhenFirstNameIsNull()
-////{
-////    //arrange
-
-////    string firstName = null;
-////    string lastName = "lastname";
-////    string email = "123@mail.com";
-////    int locationID = 1;
-////    var options = new DbContextOptionsBuilder<GHDBContext>()
-////    .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-////    .Options;
-
-////    //act
-////    //assert
-
-////}
-
-
-
-
-////[TestMethod]
-////public void CreateSubscription_ShouldReturnNull_WhenLastNameIsNull()
-////{
-////    //arrange
-////    string firstName = "firstname";
-////    string lastName = null;
-////    string email = "123@mail.com";
-////    int locationID = 1;
-
-////    var options = new DbContextOptionsBuilder<GHDBContext>()
-////    .UseNpgsql("Host = queenie.db.elephantsql.com; Port=5432; Database=ufmbvrid; Username=ufmbvrid; Password=5wlreA7C8L5JcTuYANpZLj8rlHNFd1SQ;")
-////    .Options;
-////    //act
-////    //assert
-////}
-
-
-
-
-
-////[TestMethod]
-////public void CreateSubscription_IsTrue_WhenFieldsAreNotNull() 
-////{ }
