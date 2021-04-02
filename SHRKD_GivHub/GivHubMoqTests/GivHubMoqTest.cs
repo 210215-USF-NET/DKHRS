@@ -428,10 +428,10 @@ namespace GivHubMoqTests
             Assert.IsInstanceOfType(result, typeof(CreatedAtActionResult));
         }
 
-            
-         
-       
-        
+
+
+
+
 
 
         [TestMethod]
@@ -719,13 +719,13 @@ namespace GivHubMoqTests
             var searchHistoryBLMock = new Mock<ISearchHistoryBL>();
             SearchHistory searchHistory = new SearchHistory();
             string email = "any email";
-            int id = 2;
-            searchHistoryBLMock.Setup(i => i.GetUserSingleSearchHistoryAsync(email, id)).ReturnsAsync(searchHistory);
+            string phrase = "any phrase";
+            searchHistoryBLMock.Setup(i => i.GetUserSingleSearchHistoryAsync(email, phrase)).ReturnsAsync(searchHistory);
             searchHistoryBLMock.Setup(i => i.DeleteSearchHistoryAsync(searchHistory)).ReturnsAsync(searchHistory);
             SearchHistoryController searchHistoryController = new SearchHistoryController(searchHistoryBLMock.Object);
 
             //act
-            var result = await searchHistoryController.DeleteSearchHistoryAsync(email, id);
+            var result = await searchHistoryController.DeleteSearchHistoryAsync(email, phrase);
 
             //assert
             Assert.IsInstanceOfType(result, typeof(NoContentResult));
@@ -739,13 +739,13 @@ namespace GivHubMoqTests
             var searchHistoryBLMock = new Mock<ISearchHistoryBL>();
             SearchHistory searchHistory = null;
             string email = "any email";
-            int id = 2;
-            searchHistoryBLMock.Setup(i => i.GetUserSingleSearchHistoryAsync(email, id)).ReturnsAsync(searchHistory);
+            string phrase = "any phrase";
+            searchHistoryBLMock.Setup(i => i.GetUserSingleSearchHistoryAsync(email, phrase)).ReturnsAsync(searchHistory);
             searchHistoryBLMock.Setup(i => i.DeleteSearchHistoryAsync(searchHistory)).Throws(new Exception());
             SearchHistoryController searchHistoryController = new SearchHistoryController(searchHistoryBLMock.Object);
 
             //act
-            var result = await searchHistoryController.DeleteSearchHistoryAsync(email, id);
+            var result = await searchHistoryController.DeleteSearchHistoryAsync(email, phrase);
 
             //assert
             Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
@@ -839,34 +839,50 @@ namespace GivHubMoqTests
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
-
         /**************************
-         * Subscription Controller
-         * ***********************/
+                 * Subscription Controller
+                 * ***********************/
 
         [TestMethod]
         public async Task AddSubscriptionAsync_ShouldReturnCreatedAtActionResult_WhenSubscriptionIsValid()
         {
+            //arrange
             var subscriptionBLMock = new Mock<ISubscriptionBL>();
+            string email = "email";
+            int charityVal = 7;
+            Subscription subscription = new Subscription();
+            subscriptionBLMock.Setup(i => i.GetSingleUserSubscription(email, charityVal)).ReturnsAsync(subscription);
+            subscriptionBLMock.Setup(i => i.AddSubscriptionAsync(subscription)).ReturnsAsync(subscription);
+            SubscriptionController subscriptionController = new SubscriptionController(subscriptionBLMock.Object);
+
+            //act
+            var result = await subscriptionController.AddSubscriptionAsync(subscription);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(CreatedAtActionResult));
 
         }
 
-        /*
-          public async Task<IActionResult> AddSubscriptionAsync([FromBody] Subscription subscription)
+
+        [TestMethod]
+        public async Task AddSubscriptionAsync_ShouldReturnStatusCode400_WhenSubscriptionIsInvalid()
         {
-            try
-            {
-                var findSub = await _subBL.GetSingleUserSubscription(subscription.Email, subscription.CharityId);
-                if (findSub != null) return NotFound();
-                await _subBL.AddSubscriptionAsync(subscription);
-                return CreatedAtAction("AddSubscription", subscription);
-            }
-            catch
-            {
-                return StatusCode(400);
-            }
-        }
-         */
+            //arrange
+            var subscriptionBLMock = new Mock<ISubscriptionBL>();
+            string email = "email";
+            int charityVal = 7;
+            Subscription subscription = null;
+            subscriptionBLMock.Setup(i => i.GetSingleUserSubscription(email, charityVal)).ReturnsAsync(subscription);
+            subscriptionBLMock.Setup(i => i.AddSubscriptionAsync(subscription)).Throws(new Exception());
+            SubscriptionController subscriptionController = new SubscriptionController(subscriptionBLMock.Object);
 
+            //act
+            var result = await subscriptionController.AddSubscriptionAsync(subscription);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(400, ((StatusCodeResult)result).StatusCode);
+
+        }
     }
 }

@@ -62,7 +62,7 @@ namespace GivHubTests
         public async Task GetDonationByIdAsync_ShouldReturnCorrectDonation_WhenIDIsValid()
         {
             //arrange
-            int id = 270527563;
+            int id = 7;
 
             //act
             var result = await donationBL.GetDonationByIdAsync(id);
