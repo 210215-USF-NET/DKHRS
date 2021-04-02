@@ -845,7 +845,7 @@ namespace GivHubMoqTests
          * ***********************/
 
         [TestMethod]
-        public async Task<IActionResult> AddSubscriptionAsync_ShouldReturnCreatedAtActionResult_WhenSubscriptionIsValid()
+        public async Task AddSubscriptionAsync_ShouldReturnCreatedAtActionResult_WhenSubscriptionIsValid()
         {
             var subscriptionBLMock = new Mock<ISubscriptionBL>();
         }
