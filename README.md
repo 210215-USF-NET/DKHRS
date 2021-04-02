@@ -24,15 +24,17 @@ C#, Azure Pipeline, PostgreSql, Angular, ASP.NET REST API, Serilog, SonarCloud, 
 
 ## Project Links
 
-SonarCloud: https://sonarcloud.io/dashboard?id=210215-USF-NET_GivHub-By-SHRKD
+[SonarCloud](https://sonarcloud.io/dashboard?id=210215-USF-NET_GivHub-By-SHRKD)
 
-Web App Link: http://givhub.azurewebsites.net/
+[Web Application](http://givhub.azurewebsites.net/)
 
-CharityAPI: http://charityapi.orghunter.com/
+[CharityAPI](http://charityapi.orghunter.com/)
 
-Proposal: https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/Proposal.md
+[NYTimes Article Search API](https://developer.nytimes.com/docs/articlesearch-product/1/overview)
 
-Presentation: https://docs.google.com/presentation/d/19hezvOBl687k-fop5LoFJ0Kfc13sslzJUtTbCBkVQ70/edit#slide=id.p
+[Proposal](https://github.com/210215-USF-NET/GivHub-By-SHRKD/blob/Readme/Proposal.md)
+
+[Presentation](https://docs.google.com/presentation/d/19hezvOBl687k-fop5LoFJ0Kfc13sslzJUtTbCBkVQ70/edit#slide=id.p)
 
 
 ## Requirements
