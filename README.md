@@ -45,7 +45,7 @@ C#, Azure Pipeline, PostgreSql, Angular, ASP.NET REST API, Serilog, SonarCloud, 
 - [x] Pipeline should be set up
 - [x] Angular Frontend
 - [x] ASP.NET REST API Backend
-- [ ] At least 50% code coverage in sonar cloud
+- [x] At least 50% code coverage in sonar cloud
 - [x] 0% code duplications, A rating on all categories
 - [x] Deployed to an app service (both front and back)
 - [x] One repo for each project
