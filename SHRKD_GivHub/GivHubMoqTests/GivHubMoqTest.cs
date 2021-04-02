@@ -63,7 +63,7 @@ namespace GivHubMoqTests
         }
 
         [TestMethod]
-        public async Task DeleteCharityAsync_ShouldReturnNoContent_WhenCharityIDIsValid() 
+        public async Task DeleteCharityAsync_ShouldReturnNoContent_WhenCharityIDIsValid()
         {
             //arrange
             int id = 2;
@@ -169,10 +169,6 @@ namespace GivHubMoqTests
 
 
 
-
-
-
-
         [TestMethod]
         public async Task GetCharitiesByCategoryAsync_ShouldReturnOKCharityActionResult_WhenCategoryIsValid()
         {
@@ -265,7 +261,7 @@ namespace GivHubMoqTests
         }
 
         [TestMethod]
-        public async Task GetCharityByEidAsync_ShouldReturnNotFound_WhenEIDIsNull() ////
+        public async Task GetCharityByEidAsync_ShouldReturnNotFound_WhenEIDIsNull()
         {
 
             //arrange
@@ -320,22 +316,6 @@ namespace GivHubMoqTests
         }
 
 
-        [TestMethod]
-        public async Task GetDonationsASync_ShouldAlwaysReturnOKObjectResult()
-        {
-            //arrange
-            var donationBLMock = new Mock<IDonationBL>();
-            var charityBLMock = new Mock<ICharityBL>();
-            List<Donation> donations = new List<Donation>();
-            donationBLMock.Setup(i => i.GetDonationsAsync()).ReturnsAsync(donations);
-            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
-
-            //act
-            var result = await donationController.GetDonationsAsync();
-
-            //assert
-            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
-        }
 
         [TestMethod]
         public async Task GetCharityByWebsiteAsync_ShouldReturnOKActionResult_WhenWebsiteIsValid()
@@ -406,6 +386,286 @@ namespace GivHubMoqTests
             Assert.AreEqual(500, ((StatusCodeResult)result).StatusCode);
         }
 
+        /********************************
+         * Donation Controller 
+         ********************************/
+
+        [TestMethod]
+        public async Task GetDonationsASync_ShouldAlwaysReturnOKObjectResult()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            List<Donation> donations = new List<Donation>();
+            donationBLMock.Setup(i => i.GetDonationsAsync()).ReturnsAsync(donations);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.GetDonationsAsync();
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+
+        [TestMethod]
+        public async Task GetTopDonationsAsync_ShouldReturnOKObjectResult()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            List<Donation> donations = new List<Donation>();
+            donationBLMock.Setup(i => i.GetTopDonationsAsync()).ReturnsAsync(donations);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.GetTopDonationsAsync();
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+
+        [TestMethod]
+        public async Task GetDonationByCharityAsync_ShouldReturnOKObjectResult_WhenIDIsValid()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            int id = 9;
+            List<Donation> donations = new List<Donation>();
+            donationBLMock.Setup(i => i.GetDonationsByCharityAsync(id)).ReturnsAsync(donations);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.GetDonationByCharityAsync(id);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+
+
+        [TestMethod]
+        public async Task GetDonationByCharityAsync_ShouldReturnNotFound_WhenDonationIsNull()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            int id = 9;
+            List<Donation> donations = null;
+            donationBLMock.Setup(i => i.GetDonationsByCharityAsync(id)).ReturnsAsync(donations);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.GetDonationByCharityAsync(id);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
+
+
+
+
+        [TestMethod]
+        public async Task AddDonationAsync_ShouldReturnCreatedAtActionResult_WhenCharityIDIsValid()////////incomplete
+        {
+            var donationBLMock = new Mock<IDonationBL>();
+            Donation donation = new Donation();
+            int charityID = 8;
+            /*
+                            public async Task<IActionResult> AddDonationAsync([FromBody] Donation donation)
+                   {
+                       if (donation.CharityId > 0)
+                       {
+                           try
+                           {
+                               var charity = await _charBL.GetCharityByEidAsync(donation.CharityId.ToString());
+                               if (charity != null)
+                               {
+                                   await _donBL.AddDonationAsync(donation);
+                                   return CreatedAtAction("AddDonation", donation);
+                               }
+                           }
+                           catch
+                           {
+                               return StatusCode(400);
+                           }
+                       }
+                       return StatusCode(400);
+                   }*/
+        }
+
+
+
+        [TestMethod]
+        public async Task DeleteDonationAsync_ShouldReturnNoContent_WhenIDIsValid()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            int id = 8;
+            Donation donation = new Donation();
+            donationBLMock.Setup(i => i.DeleteDonationAsync(donation)).ReturnsAsync(donation);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.DeleteDonationAsync(id);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NoContentResult));
+        }
+
+        [TestMethod]
+        public async Task DeleteDonationAsync_ShouldReturnStatusCode500_WhenDonationIsInvalid()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            int id = 8;
+            Donation donation = null;
+            donationBLMock.Setup(i => i.DeleteDonationAsync(donation)).Throws(new Exception());
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.DeleteDonationAsync(id);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(500, ((StatusCodeResult)result).StatusCode);
+        }
+
+
+        [TestMethod]
+        public async Task GetDonationByIdAsync_ShouldReturnOKObjectResult_WhenIDIsValid()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            int id = 9;
+            Donation donation = new Donation();
+            donationBLMock.Setup(i => i.GetDonationByIdAsync(id)).ReturnsAsync(donation);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.GetDonationByIdAsync(id);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+
+        }
+
+
+        [TestMethod]
+        public async Task GetDonationByIdAsync_ShouldReturNotFound_WhenDonationIsInvalid()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            int id = 9;
+            Donation donation = null;
+            donationBLMock.Setup(i => i.GetDonationByIdAsync(id)).ReturnsAsync(donation);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.GetDonationByIdAsync(id);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+
+        }
+
+
+        [TestMethod]
+        public async Task GetDonationsByUserAsync_ShouldReturnOkResult_WhenDonationIsValid()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            string email = "email";
+            List<Donation> donation = new List<Donation>();
+            donationBLMock.Setup(i => i.GetDonationsByUserAsync(email)).ReturnsAsync(donation);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+            
+            //act
+            var result = await donationController.GetDonationsByUserAsync(email);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+        }
+
+
+
+        [TestMethod]
+        public async Task GetDonationsByUserAsync_ShouldReturnNotFound_WhenDonationIsInvalid()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            string email = "email";
+            List<Donation> donation = null;
+            donationBLMock.Setup(i => i.GetDonationsByUserAsync(email)).ReturnsAsync(donation);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.GetDonationsByUserAsync(email);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
+
+
+        [TestMethod]
+        [ExpectedException (typeof(NullReferenceException))]
+        public async Task GetDonationsByUserAsync_ShouldReturnStatusCode400_WhenUserEmailIsInvalid()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            string email = null;
+            List<Donation> donation = new List<Donation>();
+            donationBLMock.Setup(i => i.GetDonationsByUserAsync(email)).ReturnsAsync(donation);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.GetDonationsByUserAsync(email);
+
+            //assert expected exception
+        }
+
+        [TestMethod]
+        public async Task UpdateDonationAsync_ShouldReturnNoContent_WhenDonationIsValid()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            Donation donation = new Donation();
+            donationBLMock.Setup(i => i.UpdateDonationAsync(donation)).ReturnsAsync(donation);
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.UpdateDonationAsync(donation);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(NoContentResult));
+
+        }
+
+        [TestMethod]
+        public async Task UpdateDonationAsync_ShouldReturnStatusCode500_WhenDonationIsInvalid()
+        {
+            //arrange
+            var donationBLMock = new Mock<IDonationBL>();
+            var charityBLMock = new Mock<ICharityBL>();
+            Donation donation = null;
+            donationBLMock.Setup(i => i.UpdateDonationAsync(donation)).Throws(new Exception());
+            var donationController = new DonationController(donationBLMock.Object, charityBLMock.Object);
+
+            //act
+            var result = await donationController.UpdateDonationAsync(donation);
+
+            //assert
+            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+            Assert.AreEqual(500, ((StatusCodeResult)result).StatusCode);
+
+        }
 
 
 
@@ -493,7 +753,7 @@ namespace GivHubMoqTests
         }
 
         [TestMethod]
-        public async Task GetLocationByCityStateAsync_ShouldReturnOKObjectResult_WhenCityAndStateAreValid() 
+        public async Task GetLocationByCityStateAsync_ShouldReturnOKObjectResult_WhenCityAndStateAreValid()
         {
             //arrange
             var locationBLMock = new Mock<ILocationBL>();
@@ -1044,7 +1304,7 @@ namespace GivHubMoqTests
             SubscriptionController subscriptionController = new SubscriptionController(subscriptionBLMock.Object);
 
             //act
-            var result = await subscriptionController.DeleteSubscriptionAsync(email,charityVal);
+            var result = await subscriptionController.DeleteSubscriptionAsync(email, charityVal);
 
             //assert
             Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
