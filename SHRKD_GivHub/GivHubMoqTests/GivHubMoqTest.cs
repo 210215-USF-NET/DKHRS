@@ -428,17 +428,10 @@ namespace GivHubMoqTests
             Assert.IsInstanceOfType(result, typeof(CreatedAtActionResult));
         }
 
-<<<<<<< HEAD
-            
-         
-       
-        
-=======
 
 
 
 
->>>>>>> main
 
 
         [TestMethod]
@@ -726,22 +719,14 @@ namespace GivHubMoqTests
             var searchHistoryBLMock = new Mock<ISearchHistoryBL>();
             SearchHistory searchHistory = new SearchHistory();
             string email = "any email";
-<<<<<<< HEAD
-            int id = 2;
-            searchHistoryBLMock.Setup(i => i.GetUserSingleSearchHistoryAsync(email, id)).ReturnsAsync(searchHistory);
-=======
             string phrase = "any phrase";
             searchHistoryBLMock.Setup(i => i.GetUserSingleSearchHistoryAsync(email, phrase)).ReturnsAsync(searchHistory);
->>>>>>> main
+
             searchHistoryBLMock.Setup(i => i.DeleteSearchHistoryAsync(searchHistory)).ReturnsAsync(searchHistory);
             SearchHistoryController searchHistoryController = new SearchHistoryController(searchHistoryBLMock.Object);
 
             //act
-<<<<<<< HEAD
-            var result = await searchHistoryController.DeleteSearchHistoryAsync(email, id);
-=======
             var result = await searchHistoryController.DeleteSearchHistoryAsync(email, phrase);
->>>>>>> main
 
             //assert
             Assert.IsInstanceOfType(result, typeof(NoContentResult));
@@ -755,22 +740,13 @@ namespace GivHubMoqTests
             var searchHistoryBLMock = new Mock<ISearchHistoryBL>();
             SearchHistory searchHistory = null;
             string email = "any email";
-<<<<<<< HEAD
-            int id = 2;
-            searchHistoryBLMock.Setup(i => i.GetUserSingleSearchHistoryAsync(email, id)).ReturnsAsync(searchHistory);
-=======
             string phrase = "any phrase";
             searchHistoryBLMock.Setup(i => i.GetUserSingleSearchHistoryAsync(email, phrase)).ReturnsAsync(searchHistory);
->>>>>>> main
             searchHistoryBLMock.Setup(i => i.DeleteSearchHistoryAsync(searchHistory)).Throws(new Exception());
             SearchHistoryController searchHistoryController = new SearchHistoryController(searchHistoryBLMock.Object);
 
             //act
-<<<<<<< HEAD
-            var result = await searchHistoryController.DeleteSearchHistoryAsync(email, id);
-=======
             var result = await searchHistoryController.DeleteSearchHistoryAsync(email, phrase);
->>>>>>> main
 
             //assert
             Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
@@ -864,16 +840,9 @@ namespace GivHubMoqTests
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
-<<<<<<< HEAD
-
-        /**************************
-         * Subscription Controller
-         * ***********************/
-=======
         /**************************
                  * Subscription Controller
                  * ***********************/
->>>>>>> main
 
         [TestMethod]
         public async Task AddSubscriptionAsync_ShouldReturnCreatedAtActionResult_WhenSubscriptionIsValid()
@@ -916,9 +885,5 @@ namespace GivHubMoqTests
             Assert.AreEqual(400, ((StatusCodeResult)result).StatusCode);
 
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> main
     }
 }
