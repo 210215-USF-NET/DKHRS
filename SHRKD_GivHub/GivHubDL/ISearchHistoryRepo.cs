@@ -14,7 +14,7 @@ namespace GivHubDL
         Task<List<SearchHistory>> GetSearchHistoriesAsync();
         Task<List<SearchHistory>> GetSearchHistoriesByUserAsync(string email);
 
-        Task<SearchHistory> GetUserSingleSearchHistoryAsync(string email, int id);
+        Task<SearchHistory> GetUserSingleSearchHistoryAsync(string email, string phrase);
         Task<SearchHistory> UpdateSearchHistoryAsync(SearchHistory search2BUpdated);
     }
 }

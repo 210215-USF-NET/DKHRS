@@ -35,9 +35,9 @@ namespace GivHubBL
             return await _repo.GetSearchHistoriesByUserAsync(email);
         }
 
-        public async Task<SearchHistory> GetUserSingleSearchHistoryAsync(string email, int id)
+        public async Task<SearchHistory> GetUserSingleSearchHistoryAsync(string email, string phrase)
         {
-            return await _repo.GetUserSingleSearchHistoryAsync(email, id);
+            return await _repo.GetUserSingleSearchHistoryAsync(email, phrase);
         }
 
         public async Task<SearchHistory> UpdateSearchHistoryAsync(SearchHistory search2BUpdated)
